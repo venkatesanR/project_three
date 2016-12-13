@@ -17,17 +17,19 @@ public class SpiralPrinting {
 			if (columnStart == Matrix.c) {
 				break;
 			}
-		}rowList.add(rowStart);
+		}
+		rowList.add(rowStart);
 		columnStart = columnStart - 1;
 		rowStart = rowStart + 1;
-		
+
 		while (!rowList.contains(rowStart)) {
 			System.out.println(Matrix.matrix[rowStart][columnStart]);
 			rowStart = rowStart + 1;
 			if (rowStart == Matrix.r) {
 				break;
 			}
-		}columnList.add(columnStart);
+		}
+		columnList.add(columnStart);
 	}
 
 	public static void decrement(int rowend, int columnend) {
@@ -38,17 +40,19 @@ public class SpiralPrinting {
 			if (columnend == columnStart - 1) {
 				break;
 			}
-		}rowList.add(rowend);
+		}
+		rowList.add(rowend);
 		columnend = columnend + 1;
 		rowend = rowend - 1;
-		
+
 		while (!rowList.contains(rowend)) {
 			System.out.println(Matrix.matrix[rowend][columnend]);
 			rowend = rowend - 1;
 			if (rowend == rowStart - 1) {
 				break;
 			}
-		}columnList.add(columnStart);
+		}
+		columnList.add(columnend);
 	}
 
 	public static void main(String[] args) {
