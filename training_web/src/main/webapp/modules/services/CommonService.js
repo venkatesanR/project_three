@@ -10,29 +10,44 @@
         */
 
         return $resource('', {}, {
-            samplePostService: {
+            findRoot: {
                 method: 'POST',
                 isArray: false,
-                url: appConfig.serviceapi.quote.QUOTE_API_URL_SEARCH_PAGINATION,
+                url: appConfig.serviceapi.FIND_ROOT_URL,
                 timeout: 100000,
                 globalErrorHandling: true,
                 globalMsgHandling: true
             },
-            getMasterService: {
+            getUserList: {
                 method: 'GET',
-                url: appConfig.serviceapi.quote.QUOTE_API_URL_GET_QUOTE_ID,
+                url: appConfig.serviceapi.GET_USER_LIST_URL,
                 globalErrorHandling: true,
                 globalMsgHandling: true
             }
-            
+
         });
     }]);
 
-    angular.module('projectThreeApp').factory('MasterService', ['UrlService',
+    angular.module('projectThreeApp').factory('RootService', ['UrlService',
         function(UrlService) {
             return {
                 resolve: function(request) {
-                    var masterInfo = UrlService.getMasterService(
+                    var masterInfo = UrlService.findRoot(
+                        request,
+                        function(resData, responseHeaders) {
+                            return resData;
+                        });
+                    return masterInfo.$promise;
+                }
+            };
+        }
+    ]);
+
+    angular.module('projectThreeApp').factory('UserListService', ['UrlService',
+        function(UrlService) {
+            return {
+                resolve: function(request) {
+                    var masterInfo = UrlService.getUserList(
                         request,
                         function(resData, responseHeaders) {
                             return resData;

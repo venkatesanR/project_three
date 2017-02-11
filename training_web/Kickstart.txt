@@ -1,0 +1,182 @@
+Git Repositary Statrup guide
+------------------------
+echo # wp_spring_intg >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/venkatesanR/wp_spring_intg.git
+git push -u origin master
+git init is required start repositary
+-------------------------------------
+>git init
+
+git clone
+--------
+>git clone /path/to/repository(local path)
+>git clone username@host:/path/to/repository
+
+git add and commit
+----------------
+>git add <filename>
+>git add *(This is the first step in the basic git workflow. To actually commit these changes use)
+
+>git commit -m "Commit message"(Now the file is committed to the HEAD, but not in your remote repository yet.)
+
+git push changes
+----------------
+Your changes are now in the HEAD of your local working copy. To send those changes to your remote repository, execute
+
+>git push origin master
+
+If you have not cloned an existing repository and want to connect your repository to a remote server, you need to add it with
+ > git remote add origin <server>
+Now you are able to push your changes to the selected remote server
+
+update and merge
+to update your local repository to the newest commit, execute 
+ >git pull
+in your working directory to fetch and merge remote changes.
+to merge another branch into your active branch (e.g. master), use
+git merge <branch>
+in both cases git tries to auto-merge changes. Unfortunately, this is not always possible and results in conflicts. You are responsible to merge those conflicts manually by editing the files shown by git. After changing, you need to mark them as merged with
+ > git add <filename>
+before merging changes, you can also preview them by using
+ > git diff <source_branch> <target_branch>
+
+===================================================================================================================
+D3 JS Basics:
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+d3.tsv - load and parse data
+d3.time.format - parse dates
+d3.time.scale - x-position encoding
+d3.scale.linear - y-position encoding
+d3.extent and d3.max - compute domains
+d3.svg.axis - display axes
+d3.svg.area - display area shape
+===================================================================================================================
+Spring Example Project Creation:
+---------------------------------
+mvn archetype:generate -DgroupId=com.spring.intg -DartifactId=springintg -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DgroupId=angular_btap -DartifactId=angular_btap -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+Core container:
+--------------
+spring-core -Beans and Bean Factory
+spring-beans
+spring-context-Locating bean by Id using app context like(JNDI)
+spring-context-suuport-support(EhCache,Guava,JCache,JavaMailing,commonJ,Quartz,FreeMarker,Jasper Reports,Velocity)
+spring-expression(SpEl)
+
+AOP and Instrumentation
+----------------------
+spring-aspects-(AspectJ)
+
+spring-instrument-(class loader implementations to used cer appservers eg:spring-instrument-tomcat)
+
+
+Messaging
+---------
+spring-messaging
+
+Data Access/Integeration(JDBC,ORM,OXM,JMS)
+------------------------
+spring-jdbc
+spring-tx
+spring-orm(ORM API's-JPA,JDO,Hibernate)
+spring-oxm(Object XML mapping JAXB,CASTOR,XMLBeans,JiBx,XStream)
+spring-jms(:-spring-messaging)
+
+WEB
+---
+spring-web
+spring-webmvc
+spring-websocket
+spring-webmvc-portlet
+
+Test
+----
+spring-test(JUnit TestNG)
+------------------------------------------------------------------------------------------------
+Dependency Management Tools
+---------------------------
+Maven-naming for spring jars(spring-*-version.jar and groupId is org.springframework)
+Gradle
+Ivy
+
+Spring artifacts for maven:
+---------------------------
+common groupId:org.springframework
+spring-aop> Proxy-based AOP support
+spring-aspects> AspectJ based aspects
+spring-beans> Beans support, including Groovy
+spring-context> Application context runtime,including scheduling and remoting abstractions
+spring-context-support> Support classes for integrating common third-party libraries into a Spring application context
+spring-core> Core utilities, used by manyother Spring modules
+spring-expression> Spring Expression Language(SpEL)
+spring-instrument> Instrumentation agent for JVM bootstrapping
+spring-instrument-tomcat> Instrumentation agent for Tomcat
+spring-jdbc> JDBC support package, including DataSource setup and JDBC access support
+spring-jms> JMS support package, including helper classes to send and receive JMS messages
+spring-messaging> Support for messaging architectures and protocols
+spring-orm> Object/Relational Mapping, including JPA and Hibernate support
+spring-oxm> Object/XML Mapping
+spring-test> Support for unit testing and integration testing Spring components
+spring-tx>Transaction infrastructure, including DAO support and JCA integration
+spring-web>Web support packages, including client and web remoting
+spring-webmvc> REST Web Services and model-view-controller implementation for web applications
+spring-webmvc-portlet>MVC implementation to be used in a Portlet environment
+spring-websocket >WebSocket and SockJS implementations, including STOMP support
+----------------------------------------------------------------------------------------------------
+
+Base Line req:
+--------------
+Java 6+
+JPA 2.0+
+SERVLET 3.0+
+JMS 2.0,
+JTA 1.2,
+JPA 2.1, 
+Bean Validation 1.1,
+JSR-236
+======================================================================================================
+IOC:
+----
+packages:
+org.springframework.beans
+org.springframework.context
+
+Notes:	BeanFactory interface>extends>ApplicationContext
+		message resource used for i18n
+
+This part is involving in three/two phase:
+
+.class -> METADATA(XML)-> BEAN CONTAINER
+
+format of metadata>
+<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+		<!-- BASED ON ANOTHER METADATA -->
+		<import resource="/resources/themeSource.xml"/>
+		<!-- Bean Defination -->
+		<bean id="accountDao" class="org.springframework.samples.jpetstore.dao.jpa.JpaAccountDao">
+			<!-- additional collaborators and configuration for this bean go here -->
+			
+		</bean>
+		<!-- more bean definitions for data access objects go here -->
+</beans>
+
+BeanDefination Object:
+----------------------
+	class:the section called “Instantiating beans”
+	name :the section called “Naming beans”
+	scope :Section 5.5, “Bean scopes”
+	constructor arguments :the section called “Dependency injection”
+	properties: the section called “Dependency injection”
+	autowiring mode: the section called “Autowiring collaborators”
+	lazy-initialization mode: the section called “Lazy-initialized beans”
+	initialization method :the section called “Initialization callbacks”
+	destruction method :the section called “Destruction callbacks”

@@ -34,10 +34,18 @@
 	projectThreeApp.config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-			when('/workspace', {
+			when('/', {
 				controller: 'MasterController',
-				templateUrl: 'views/workspace.html'
-			});
+				templateUrl: 'views/home.html'
+			}).when('/mathematics', {
+				controller: 'MathsController',
+				templateUrl: 'views/findroot.html'
+			}).when('/userlist', {
+				controller: 'UserListController',
+				templateUrl: 'views/userlist.html'
+			}).otherwise({
+				redirectTo: '/'
+			});;
 		}
 	]);
 

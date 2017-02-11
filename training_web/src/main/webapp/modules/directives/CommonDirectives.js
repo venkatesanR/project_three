@@ -13,7 +13,7 @@
 	    Specify the "controller" for asw-app-messages in $model html
 	    <div asw-app-messages controller="CreateContractShellController"></div>
 	*/
-	angular.module('projectThreeApp').directive('aswAppMessages', ['$log', '$rootScope',
+	angular.module('projectThreeApp').directive('aswAppMessages', ['$rootScope',
 		function($log, $rootScope) {
 			return {
 				restrict: 'A',
