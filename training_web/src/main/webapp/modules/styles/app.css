@@ -1,33 +1,55 @@
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  min-height: 100%;
-  position: relative;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
-}
+/*****
+*
+* @name - app.css
+* @description - Basic style file
+* @author - Yuvaraj, Venkat and Krishna
+* @date - 13th February 2017  
+*
+*****/
 
+/* BASIC TAG STYLE - STARTS */
+html {min-height: 100%;position: relative;}
+body {margin-bottom: 60px;}
+/* BASIC TAG STYLE - ENDS */
 
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-body > .container {
-  padding: 60px 15px 0;
-}
+/* LAYOUT STYLE - STARTS */
+body > .container {padding: 60px 15px 0;}
+#footer {position: absolute;bottom: 0;width: 100%;height: 60px;background-color: #f5f5f5;}
 .footer-block { margin: 20px 0; }
+#footer > .container {padding-right: 15px;padding-left: 15px;}
+/* LAYOUT STYLE - ENDS */
 
-#footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
+/* INPUT STYLE - STARTS */
+input[type='text'], input{Width:100%;border: 1px solid #d9d9d9;border-top-color:#c0c0c0;padding: 8px;border-radius: 3px;background: #fff;color: #404040;}
+.pbtn{border: 1px solid #2f5bb7;color: #fff;text-shadow: 0 1px rgba(0,0,0,0.3);background-color: #357ae8;background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+background-image: -moz-linear-gradient(top,#4d90fe,#357ae8);background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
+background-image: linear-gradient(top,#4d90fe,#357ae8);}
+.pbtn:hover{cursor: pointer;color:#fff;}
+.sbtn{border: 1px solid #9a9a9a;color: #424242;background-color: #f3f3f3;}
+.sbtn:hover{cursor: pointer;color:#424242;}
+/* INPUT STYLE - ENDS */
+
+.mad{
+	font-size:15px;
+	font-weight: bolder;
+	color:#c00;
+	padding-left: 4px;
 }
+.error{
+	color:#c00;
+}
+.box-style1{
+	background:#f7f7f7;
+	border:1px solid #e5e5e5;
+	border-bottom-color:#b5b5b5;
+	padding: 35px 30px 15px 30px;
+	display:inline-block;
+	border-radius:4px;
+}
+
+/* TABLE STYLE - STARTS */
+.display-table{}
+.display-table tr td{padding:5px}
+.display-table tr td:first-child{padding:5px;}
+.display-table tr td strong {color: #222;}
+/* TABLE STYLE - ENDS */

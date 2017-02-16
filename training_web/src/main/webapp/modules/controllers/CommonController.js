@@ -6,17 +6,18 @@
             $scope.$on('$viewContentLoaded', function() {});
         }
     ]);
-    angular.module('projectThreeApp').controller('MathsController', ['$scope', '$locale', '$location', '$filter', '$translate', '$templateCache', '$routeParams', 'appConfig', 'RootService',
-        function MathsController($scope, $locale, $location, $filter, $translate, $templateCache, $routeParams, appConfig, RootService) {
+    angular.module('projectThreeApp').controller('MathsController', ['$scope', '$locale', '$location', '$filter', '$translate', '$templateCache', '$routeParams', 'appConfig', 'RootService','UrlService',
+        function MathsController($scope, $locale, $location, $filter, $translate, $templateCache, $routeParams, appConfig, RootService,UrlService) {
             /*  Initialize  */
-
+    		$scope.userInformationList = {};
             /*  Function(s) */
-            function findRoot() {
-                MasterTableService.search($scope.search, function(responseData, responseHeaders) {
-                    $scope.userInformationList = responseData;
+           $scope.findroot = function () {
+        	   UrlService.findRoot($scope.req, function(responseData, responseHeaders) {
+        		   $scope.userInformationList.x1 = responseData.x1;
+        		   $scope.userInformationList.x2 = responseData.x2;
+                    //$scope.userInformationList = responseData;
                 });
-            }
-
+            }      
             $scope.$on('$viewContentLoaded', function() {});
         }
     ]);
