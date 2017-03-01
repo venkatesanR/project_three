@@ -64,3 +64,27 @@ public class Fibonacci {
 		sequence(find());
 	}
 }
+
+
+
+
+/*
+ * Simple Formula
+ * The given number should satisfy at least any one of the condition.
+ * Formula is a should be a perfect square.
+ * (a*a = 5n^2 + 4) or (a*a = 5n^2 - 4 )  
+ */
+ 
+
+/*
+ * Simple formula for prime number
+ * To find whether a number is prime or not
+ * for (int i=0; i*i < n; i++){
+ * 		if (!n%i == 0){
+ * 			Number is prime
+ * 		}
+ * }
+ * 
+ * if we need to print the sequence of prime number, then go for nested loop condition. 
+ * pass values for n in a loop.
+ */

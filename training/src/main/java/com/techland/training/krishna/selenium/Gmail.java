@@ -22,12 +22,14 @@ public class Gmail {
 	@Test
 	public static void test1(){
 		try{
-			AccountCreation acc = new AccountCreation(driver);
-			acc.accountCreation(driver);	
+//			AccountCreation acc = new AccountCreation(driver);
+//			acc.accountCreation();
+			Login log = new Login(driver);
+			log.login();
 		}catch(Exception ex){
 			System.out.println(ex);
 		}
-		
+
 	}
 	
 	@AfterTest

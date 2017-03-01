@@ -31,7 +31,7 @@ public class AccountCreation {
 		PageFactory.initElements(Driver, this);
 	}
 
-	public void accountCreation(WebDriver driver) {
+	public void accountCreation() {
 		if (!"Gmail".equals(Driver.getTitle())) {
 			Driver.get("http://accounts.google.com");
 			Driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
