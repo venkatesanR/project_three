@@ -14,6 +14,7 @@ public class HibernateUtils {
 		// No invocation please
 	}
 	static {
+		//TODO Make this as Configurable by Load classpath:* (cfg.xml )
 		try {
 			sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 		} catch (Throwable ex) {

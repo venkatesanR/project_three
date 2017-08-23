@@ -1,19 +1,25 @@
 package com.techmania.datastructures;
 
-public class Node<T,W> {
-	private Edge[] edges;
-	private T data;
-	
-	public Edge[] getEdges() {
-		return edges;
+import java.util.Set;
+
+public class Node {
+	private Integer id;
+	private Set<Integer> linked;
+
+	public Node(int id) {
+		this.id = id;
 	}
-	public void setEdges(Edge[] edges) {
-		this.edges = edges;
+
+	public Integer getId() {
+		return id;
 	}
-	public T getData() {
-		return data;
+
+	public Set<Integer> getLinked() {
+		return linked;
 	}
-	public void setData(T data) {
-		this.data = data;
+
+	public void setLinked(Set<Integer> linked) {
+		this.linked = linked;
 	}
+
 }

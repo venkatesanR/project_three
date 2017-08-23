@@ -1,19 +1,27 @@
 package com.techland.training.venkat;
 
-
 public class EntryPoint {
-	public static void main(String[] args) {
-        Integer[] data = null;
-        System.out.println("Enter total ElementsIn array");
-        int N = StdIn.getInt();
-        data = new Integer[N];
-        for (int i = 0; i < N; i++) {
-            data[i] = StdOut.uniform(0, N);
-        }
-        Sort sort = new Sort();
-        GraphUtil.showGraph(data);
-        // sort.selectionSort(data);
-        sort.insertionSort(data);
-        GraphUtil.showGraph(data);
+
+	public static void main(String[] args) throws InterruptedException {
+		int count=0;
+		while(count<=9) {
+			doPrint();
+			Thread.sleep(100);
+			count=count+1;
+		}
 	}
+	
+	private static void doPrint() {
+		System.out.println("Sasi");
+	}
+	
+}
+
+class Company{
+	public Employee e;
+	
+}
+
+class Employee{
+	public String name;
 }
