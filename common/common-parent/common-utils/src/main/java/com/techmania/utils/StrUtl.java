@@ -163,7 +163,7 @@ public class StrUtl {
 	}
 
 	/**
-	 * Method used to join the String with the given delimeter
+	 * Method used to join the String with the given delimiter
 	 * 
 	 * @param inputs
 	 * @param delimeter
