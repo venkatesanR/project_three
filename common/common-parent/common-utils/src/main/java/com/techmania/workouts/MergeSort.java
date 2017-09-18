@@ -1,5 +1,9 @@
 package com.techmania.workouts;
-
+/**
+ * 
+ * @author vrengasamy
+ *
+ */
 public class MergeSort {
 	// Merges two subarrays of arr[].
 	// First subarray is arr[l..m]

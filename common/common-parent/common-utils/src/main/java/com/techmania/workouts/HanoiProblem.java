@@ -6,6 +6,7 @@ package com.techmania.workouts;
  * #2.Consider given problem consist of tower A,B,C
  * #3.Move N-1 Disk to auxiliary tower to make process easier.
  * #4.Move Nth disk to Destination disk and move all auxiliary disk to Destination
+ * T
  */
 public class HanoiProblem {
     private int totalDisk;

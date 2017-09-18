@@ -76,13 +76,10 @@ public class FunctionUtils {
         }
     }
 
-    public static int powerSum(int result,int power) {
-        if(result < N) {
-            return
-        } else {
-           return x+powerSum(result,power);
-        }
-    }
+	public static int powerSum(int result, int power) {
+		//TODO workouts needed to solve hackerrank problem
+		return 0;
+	}
 
     private static void  print(int[] a) {
         StringBuilder builder=new StringBuilder();
