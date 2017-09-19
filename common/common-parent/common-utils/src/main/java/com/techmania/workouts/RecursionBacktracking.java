@@ -2,11 +2,11 @@ package com.techmania.workouts;
 
 import java.math.BigInteger;
 
-public class FunctionUtils {
+public class RecursionBacktracking {
 	static int[] data = null;
 	private static int MAX_VALUE = 10;
 
-	private FunctionUtils() {
+	private RecursionBacktracking() {
 
 	}
 
@@ -75,7 +75,7 @@ public class FunctionUtils {
 	}
 
 	public static void printFibbonaci(int max) {
-		for(int i=0;i<max;i++) {
+		for (int i = 0; i < max; i++) {
 			System.out.println(getFibbonaci(i));
 		}
 	}
