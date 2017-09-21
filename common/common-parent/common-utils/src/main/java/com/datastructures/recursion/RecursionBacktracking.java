@@ -1,4 +1,4 @@
-package co.datastructures.recursion;
+package com.datastructures.recursion;
 
 import java.math.BigInteger;
 

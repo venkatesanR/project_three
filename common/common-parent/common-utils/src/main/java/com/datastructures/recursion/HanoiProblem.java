@@ -1,4 +1,4 @@
-package co.datastructures.recursion;
+package com.datastructures.recursion;
 
 /**
  * tower of hanoi problem based on following rules
