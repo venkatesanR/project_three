@@ -4,7 +4,7 @@
  * Created on October 6, 2003, 5:04 PM
  */
 
-package com.techmania.utils;
+package com.datastructures.utils;
 
 import java.util.*;
 

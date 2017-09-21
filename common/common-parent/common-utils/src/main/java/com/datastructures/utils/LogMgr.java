@@ -1,5 +1,5 @@
 
-package com.techmania.utils;
+package com.datastructures.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

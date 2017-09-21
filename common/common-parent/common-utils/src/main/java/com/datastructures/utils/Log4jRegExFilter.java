@@ -1,4 +1,4 @@
-package com.techmania.utils;
+package com.datastructures.utils;
 
 import org.apache.log4j.spi.Filter;
 import org.apache.log4j.spi.LoggingEvent;

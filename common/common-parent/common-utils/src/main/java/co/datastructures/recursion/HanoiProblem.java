@@ -1,4 +1,4 @@
-package com.techmania.workouts;
+package co.datastructures.recursion;
 
 /**
  * tower of hanoi problem based on following rules
