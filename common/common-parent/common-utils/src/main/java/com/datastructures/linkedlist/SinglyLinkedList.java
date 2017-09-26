@@ -64,7 +64,6 @@ public class SinglyLinkedList<T> extends LinkedListADT<T> {
 		delete(size());
 	}
 
-
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		Node iterate = head;
@@ -77,12 +76,12 @@ public class SinglyLinkedList<T> extends LinkedListADT<T> {
 
 	@Override
 	public void flush() {
-		Node pointer=head;
-		Node flushP=null;
-		while(pointer!=null) {
-			flushP=pointer.getNext();
-			pointer=null;
-			pointer=flushP;
+		Node pointer = head;
+		Node flushP = null;
+		while (pointer != null) {
+			flushP = pointer.getNext();
+			pointer = null;
+			pointer = flushP;
 		}
 	}
 }

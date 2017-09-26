@@ -6,7 +6,7 @@ public class Statistics {
 		int profit = 0;
 		int min = 0;
 		int max = 0;
-		int previousMin=0;
+		int previousMin = 0;
 		for (int i = 1; i < data.length; i++) {
 			if (data[min] < data[i] && profit < (data[i] - data[min])) {
 				profit = data[i] - data[min];
@@ -24,7 +24,7 @@ public class Statistics {
 	 * @param k
 	 * @return
 	 */
-	public static int findKthLargestSorted2D(int[][] data, int k, int n) {
+	public static int finKth2D(int[][] data, int k, int n) {
 		int row = 0;
 		if (k > n) {
 			row = (k / n);
@@ -38,9 +38,21 @@ public class Statistics {
 		return data[row][column];
 	}
 
-	public static void main(String[] args) {
-		int[][] data = { { 10, 20, 30, 40 }, { 50, 60, 70, 80 }, { 80, 90, 100, 120 }, { 120, 140, 150, 160 }, };
-		System.out.println(findKthLargestSorted2D(data, 7, 4));
+	/***
+	 * approach: 1.Sort 2.MinHeap 3.Bubble/Selection to findMax
+	 */
+	public static void kthLargest(int[] a, int k) {
+		// Bubble approach
+		for(int i=0;i<k;i++) {
+			int max=a[0];
+			for (int i = 1; i < a.length; i++) {
+				if (a[i + 1] > max) {
+					int temp=a[i+1];
+					a[pointer]=temp;
+					a[]
+				}
+			}
+		}
 
 	}
 }
