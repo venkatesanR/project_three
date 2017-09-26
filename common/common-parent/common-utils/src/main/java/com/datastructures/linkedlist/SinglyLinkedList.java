@@ -1,44 +1,33 @@
 package com.datastructures.linkedlist;
 
-public class SinglyLinkedList<T> implements LinkedListADT<T> {
-	private Node head;
-
+public class SinglyLinkedList<T> extends LinkedListADT<T> {
 	@Override
 	public void add(Object data, int position) {
 		int k = 0;
-		if (position == 0) {
+		if (head == null) {
+			head = new Node<T>((T) data, null);
+		} else if (position == 0) {
 			Node tempHead = head;
 			head = new Node<T>((T) data, tempHead);
 		} else {
-			Node current = null;
-			Node oldNext = null;
-			while (k < position) {
-				current = head.getNext();
-				if (current != null) {
-					oldNext = current.getNext();
-				}
+			Node p = head;
+			Node q = null;
+			while (k < position && p != null) {
+				q = p;
+				p = p.getNext();
 				k++;
 			}
-			if (current != null) {
-				oldNext = current.getNext();
-				current.setNext(new Node<T>((T) data, oldNext));
+			if (q != null) {
+				q.setNext(new Node<T>((T) data, p));
 			} else {
-				current = new Node<T>((T) data, oldNext);
+				q = new Node<T>((T) data, null);
 			}
 		}
-
+		count++;
 	}
 
 	@Override
 	public int size() {
-		int count = 0;
-		Node current = head;
-		while (current != null) {
-			count += 1;
-			current = current.getNext();
-			if (current == null)
-				break;
-		}
 		return count;
 	}
 
@@ -47,11 +36,53 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
 		add(data, size());
 	}
 
-	public static void main(String[] args) {
-		SinglyLinkedList<String> list = new SinglyLinkedList<>();
-		list.add("First");
-		list.add("Second");
-		System.out.println(list.size());
+	@Override
+	public void delete(int position) {
+		int k = 0;
+		if (position == 0 && head != null) {
+			Node trashNode = head;
+			head = head.getNext();
+			count--;
+		} else if (head != null) {
+			Node p = head;
+			Node pre = null;
+			while (k < position && p != null) {
+				pre = p;
+				p = p.getNext();
+				k++;
+			}
+			if (pre != null) {
+				pre.setNext(p != null ? p.getNext() : null);
+			}
+			p = null;
+			count--;
+		}
 	}
 
+	@Override
+	public void delete() {
+		delete(size());
+	}
+
+
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		Node iterate = head;
+		while (iterate != null) {
+			builder.append(iterate.getData()).append("-->");
+			iterate = iterate.getNext();
+		}
+		return builder.append("NULL").toString();
+	}
+
+	@Override
+	public void flush() {
+		Node pointer=head;
+		Node flushP=null;
+		while(pointer!=null) {
+			flushP=pointer.getNext();
+			pointer=null;
+			pointer=flushP;
+		}
+	}
 }
