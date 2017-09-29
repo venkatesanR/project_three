@@ -6,7 +6,6 @@ public class Statistics {
 		int profit = 0;
 		int min = 0;
 		int max = 0;
-		int previousMin = 0;
 		for (int i = 1; i < data.length; i++) {
 			if (data[min] < data[i] && profit < (data[i] - data[min])) {
 				profit = data[i] - data[min];
@@ -40,19 +39,25 @@ public class Statistics {
 
 	/***
 	 * approach: 1.Sort 2.MinHeap 3.Bubble/Selection to findMax
+	 * Bubble:O(k*n)
 	 */
-	public static void kthLargest(int[] a, int k) {
+	public static int kthLargest(int[] a, int k) {
 		// Bubble approach
-		for(int i=0;i<k;i++) {
-			int max=a[0];
-			for (int i = 1; i < a.length; i++) {
-				if (a[i + 1] > max) {
-					int temp=a[i+1];
-					a[pointer]=temp;
-					a[]
+		for (int i = 0; i < k; i++) {
+			int max = i;
+			for (int j = 1; j < a.length; j++) {
+				if (a[j] > a[max]) {
+					int temp = a[j];
+					a[j] = a[max];
+					a[max] = temp;
 				}
 			}
 		}
+		return a[k - 1];
+	}
 
+	public static void main(String[] args) {
+		int[] a = { 12, 1, 87, 4, 0, 99 };
+		System.out.println(kthLargest(a, 1));
 	}
 }
