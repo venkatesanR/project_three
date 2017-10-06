@@ -10,6 +10,6 @@ public class DriverClass {
 		// list.add("Medium", 2);
 		list.delete(3);
 		list.add("Fourth");
-		System.out.println(list.size());
+		System.out.println(list.toString());
 	}
 }

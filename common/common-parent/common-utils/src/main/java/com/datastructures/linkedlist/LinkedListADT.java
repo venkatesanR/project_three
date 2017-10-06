@@ -8,9 +8,6 @@ package com.datastructures.linkedlist;
  * @param <T>
  */
 public abstract class LinkedListADT<T> {
-	protected int count;
-
-	protected Node head;
 
 	public abstract void add(Object data, int position);
 
@@ -20,9 +17,7 @@ public abstract class LinkedListADT<T> {
 
 	public abstract void delete();
 
-	public int size() {
-		return count;
-	}
-
 	public abstract void flush();
+	
+	public abstract int size();
 }
