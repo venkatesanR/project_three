@@ -3,11 +3,17 @@ package com.datastructures.linkedlist;
 public class Node<T> {
 	private T data;
 	private Node next;
-	private Node previous;
+	private Node prev;
 
 	public Node(T data, Node next) {
 		this.data = data;
 		this.next = next;
+	}
+
+	public Node(T data, Node next, Node prev) {
+		this.data = data;
+		this.next = next;
+		this.prev = prev;
 	}
 
 	public T getData() {
@@ -26,12 +32,12 @@ public class Node<T> {
 		this.next = next;
 	}
 
-	public Node getPrevious() {
-		return previous;
+	public Node getPrev() {
+		return prev;
 	}
 
-	public void setPrevious(Node previous) {
-		this.previous = previous;
+	public void setPrev(Node prev) {
+		this.prev = prev;
 	}
 
 }
