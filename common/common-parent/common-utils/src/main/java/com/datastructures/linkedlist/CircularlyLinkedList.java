@@ -1,5 +1,10 @@
 package com.datastructures.linkedlist;
-
+/**
+ * 
+ * @author vrengasamy
+ *
+ * @param <T>
+ */
 public class CircularlyLinkedList<T> extends LinkedListADT<T> {
 
 	@Override
