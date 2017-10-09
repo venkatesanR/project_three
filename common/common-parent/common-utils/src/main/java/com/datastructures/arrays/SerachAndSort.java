@@ -66,7 +66,6 @@ public class SerachAndSort {
 				System.out.println("x= " + a[x] + "\t y=" + a[y] + "\t sum= " + sum);
 				break;
 			}
-
 		}
 	}
 
