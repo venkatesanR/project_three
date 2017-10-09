@@ -1,6 +1,14 @@
 package com.datastructures.linkedlist;
 
 public class DoublyLinkedList<T> extends LinkedListADT<T> {
+	protected int count;
+
+	protected Node head;
+
+	@Override
+	public int size() {
+		return count;
+	}
 
 	/**
 	 * Similar to singly-linked list we can add data into doubly linked list
@@ -37,17 +45,41 @@ public class DoublyLinkedList<T> extends LinkedListADT<T> {
 
 	@Override
 	public void delete(int position) {
-
+		int k = 0;
+		if (position == 0 && head != null) {
+			Node trashNode = head;
+			head = head.getNext();
+			count--;
+		} else if (head != null) {
+			Node p = head;
+			Node pre = null;
+			while (k < position && p != null) {
+				pre = p;
+				p = p.getNext();
+				k++;
+			}
+			if (pre != null) {
+				pre.setNext(p != null ? p.getNext() : null);
+			}
+			p = null;
+			count--;
+		}
 	}
 
 	@Override
 	public void delete() {
-
+		delete(size());
 	}
 
 	@Override
 	public void flush() {
-
+		Node pointer = head;
+		Node flushP = null;
+		while (pointer != null) {
+			flushP = pointer.getNext();
+			pointer = null;
+			pointer = flushP;
+		}
 	}
 
 	@Override

@@ -13,6 +13,10 @@ public class DriverClass {
 		list.add("Second");
 		list.add("Third");
 		list.add("Fourth");
+		// list.add("Medium", 2);
+		list.delete(3);
+		list.add("Fourth");
+		System.out.println(list.toString());
 		list.add("Fifth");
 	}
 }
