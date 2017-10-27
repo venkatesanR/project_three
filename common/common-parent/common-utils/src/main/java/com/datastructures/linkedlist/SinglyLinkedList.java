@@ -4,7 +4,7 @@ public class SinglyLinkedList<T> extends LinkedListADT<T> {
 	protected int count;
 
 	protected Node head;
-	
+
 	@Override
 	public void add(Object data, int position) {
 		int k = 0;

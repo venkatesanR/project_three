@@ -1,8 +1,6 @@
 package com.datastructures.linkedlist;
 
-/**
- * revathi_balamurugan@trimble.com
- * 
+/*** 
  * @author vrengasamy
  *
  * @param <T>

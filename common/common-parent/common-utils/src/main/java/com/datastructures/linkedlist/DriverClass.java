@@ -5,7 +5,7 @@ public class DriverClass {
 		SinglyLinkedList<String> list = new SinglyLinkedList<>();
 		DoublyLinkedList<String> dlist = new DoublyLinkedList<>();
 		getList(dlist);
-		System.out.println(dlist.toString());
+		System.out.println(list.toString());
 	}
 
 	private static <T extends LinkedListADT> void getList(T list) {
