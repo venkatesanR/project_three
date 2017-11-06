@@ -1,12 +1,24 @@
 package com.datastructures.workouts;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+
+import org.apache.commons.io.FileUtils;
+
 public class DummyWorkout {
-	public static void main(String[] args) {
-		int k = 3;
-		int[] array = new int[k];
-		print(array);
-		for (int i = 0; i < k; i++) {
-			recurse(new int[k], i);
+	public static void main(String[] args) throws IOException {
+		prepareConfigFiles(
+				"/home/YUME.COM/vrengasamy/workspace/YFN/Yumeos/PacingService/src/main/java/com/yumecorp/pacingservice",
+				"pacingservice");
+	}
+	
+	private static void prepareConfigFiles(String baseLocation,String baseName) throws IOException {
+		String[] javaExtn = new String[] { "java" };
+		Collection<File> entityList = FileUtils.listFiles(new File(baseLocation + "/bean"), javaExtn, false);
+		for (File file : entityList) {
+			String serviceFileName = (baseLocation + "/bean").replaceAll("/", ".").concat(file.getName().replaceAll(".java", ""));
+			System.out.println(serviceFileName);
 		}
 	}
 

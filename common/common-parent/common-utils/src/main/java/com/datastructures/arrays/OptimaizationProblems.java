@@ -1,18 +1,23 @@
 package com.datastructures.arrays;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+import org.apache.commons.io.FileUtils;
+
 public class OptimaizationProblems {
 	public static void main(String[] args) throws IOException {
-		String data="[()][{}[{}[{}]]][]{}[]{}[]{{}({}(){({{}{}[([[]][[]])()]})({}{{}})})}";
-		/*List<String> resp = FileUtils.readLines(new File("/home/YUME.COM/vrengasamy/Desktop/input.txt"));
+		//{{}(
+	//	String data = "(}){}(}[])]]}}[]]]{((][)]])}]]{}}})}))}([([[}]({]{[]}[([]{)({[){)}){[)](()]}})(]]]))){(]})])]}])]](((}{([])(({({}{}{)({}}([])}])[)}[)[]({[{[)([[{{]]{()))([{{]{)}[({][]]]{][))]]}{)]{{({}(}}[}([[({[{{{{}((}(({((()}({{}](}[(())}]({)[((}(}][[})([}]";
+		List<String> resp = FileUtils.readLines(new File("/home/YUME.COM/vrengasamy/Desktop/input.txt"));
 		for (int index = 1; index < resp.size(); index++) {
 			System.out.println(isBalanced(resp.get(index)));
-		}*/
-		System.out.println(isBalanced(data));
+		}
+
+		//System.out.println(isBalanced(data));
 	}
 
 	static String isBalanced(String s) {
@@ -30,13 +35,21 @@ public class OptimaizationProblems {
 				String modC = String.valueOf(c);
 				if (left.contains(modC)) {
 					ls.push(modC);
-				} else if (right.contains(modC) && !ls.isEmpty()) {
-					String modl = ls.pop();
-					if (left.indexOf(modl) != right.indexOf(modC)) {
+				} else if (right.contains(modC)) {
+					if(!ls.isEmpty()) {
+						String modl = ls.pop();
+						if (left.indexOf(modl) != right.indexOf(modC)) {
+							matched = "NO";
+							break;
+						}
+					} else {
 						matched = "NO";
 						break;
 					}
 				}
+			}
+			if(!ls.isEmpty())  {
+				matched = "NO";
 			}
 			return matched;
 

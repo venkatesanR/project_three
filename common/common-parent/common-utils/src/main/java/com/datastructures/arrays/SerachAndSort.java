@@ -70,7 +70,26 @@ public class SerachAndSort {
 	}
 
 	public static void main(String[] args) {
-		int[] a = { 1, 2, 3, 4, 5, 6, 7 };
-		pairExistance(a, 12);
+		int[] a = {2,4,6,8,3};
+		insertIntoSorted(a);
 	}
+	
+	
+	public static void insertIntoSorted(int[] ar) {
+		int index = ar.length - 1;
+		for (index = ar.length - 1; index > 0; index--) {
+			if (ar[index - 1] > ar[index]) {
+				ar[index] = ar[index - 1];
+				print(ar);
+			}
+		}
+	}
+
+	public static void print(int[] data) {
+		for (int i : data) {
+			System.out.print(i + " ");
+		}
+	}
+	
+	
 }
