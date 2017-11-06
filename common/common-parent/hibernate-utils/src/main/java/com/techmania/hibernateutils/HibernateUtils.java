@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.techmania.utils.LogMgr;
+import com.datastructures.utils.LogMgr;
 
 public class HibernateUtils {
 	private static final Logger LOGGER = LogMgr.getLogger(HibernateUtils.class);
