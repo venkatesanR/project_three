@@ -1,4 +1,4 @@
-package com.techmania.stringrex;
+package com.techmania.java.bestpractice;
 
 public class StringBasics {
 	// creation

@@ -8,7 +8,7 @@ public class DriverClass {
 		System.out.println(list.toString());
 	}
 
-	private static <T extends LinkedListADT> void getList(T list) {
+	private static  void getList(LinkedListADT<?> list) {
 		list.add("First");
 		list.add("Second");
 		list.add("Third");

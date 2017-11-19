@@ -1,4 +1,4 @@
-package com.techmania.classes;
+package com.techmania.java.bestpractice;
 
 final class SimpleClass {
 
