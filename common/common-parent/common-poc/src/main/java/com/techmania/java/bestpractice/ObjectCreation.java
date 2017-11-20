@@ -38,4 +38,28 @@ public class ObjectCreation {
 		return name != null ? Services.newInstance(name) : Services.newInstance();
 	}
 
+	/**
+	 * <p>
+	 * When constructor have few optional and more mandatory fields Practically
+	 * speaking (i.e) More arguments to create object while using constructor.
+	 * 
+	 * Pattern:<tradition : telescopic constructorPattern -error prone <br>
+	 * JavaBean pattern:Its omiiting immuatabilty and making object inconsitant
+	 * state
+	 * 
+	 * To avoid pitfalls of above pattern we can use <b>Builder Pattern</b> for
+	 * construction
+	 * </p>
+	 ***/
+
+	public static NutritionFacts newInstance() {
+		//NutritionFacts cocaCola = new NutritionFacts.BuildNutrition(240, 8).calories(100).sodium(35).carbohydrate(27).build();
+		return new NutritionFacts.BuildNutrition(2, 3).build();
+		
+	}
+	
+	/***
+	 * Make sure singleton property with private construtor and enum Type
+	 * 
+	 */
 }
