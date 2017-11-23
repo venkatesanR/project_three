@@ -21,7 +21,7 @@ public class Services {
 	public static void registerProvider(String name, Provider p) {
 		providers.put(name, p);
 	}
-
+	
 	// Service access API
 	public static Service newInstance() {
 		return newInstance(DEFAULT_PROVIDER_NAME);

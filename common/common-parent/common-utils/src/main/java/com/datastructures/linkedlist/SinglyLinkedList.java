@@ -68,6 +68,17 @@ public class SinglyLinkedList<T> extends LinkedListADT<T> {
 		delete(size());
 	}
 
+	public Node removeAll(Node node, int n) {/*
+		Node currNode = head;
+		while (currNode != null) {
+			if (currNode.getData() == n) {
+				currNode.next = currNode.next.next;
+			}
+			currNode = currNode.next;
+		}
+		return head;
+
+	*/return null;}
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		Node iterate = head;

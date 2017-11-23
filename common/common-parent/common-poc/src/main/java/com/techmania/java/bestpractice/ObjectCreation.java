@@ -1,17 +1,19 @@
 package com.techmania.java.bestpractice;
 
+
+
 public class ObjectCreation {
 	/**
 	 * <p>
 	 * #1.<b>Consider static factory instead of constructors This is not factory
-	 * design pattern but its advisable instead of using public constructors and its
-	 * readability()-->BigInteger(int, int,
+	 * design pattern but its advisable instead of using public constructors and
+	 * its readability()-->BigInteger(int, int,
 	 * Random)<-->BigInteger.probablePrime();</b> <br>
 	 * #2.<b>static factory methods is that, unlike constructors, they are not
 	 * required to create a new object each time they’re invoked </b><br>
 	 * 
-	 * #3.<b>Use single constructor with unique signature If signature vary by order
-	 * Then its bad idea</b>
+	 * #3.<b>Use single constructor with unique signature If signature vary by
+	 * order Then its bad idea</b>
 	 *
 	 * 
 	 * #4.<b>Pattern : Flyweight pattern/<b>
@@ -53,13 +55,47 @@ public class ObjectCreation {
 	 ***/
 
 	public static NutritionFacts newInstance() {
-		//NutritionFacts cocaCola = new NutritionFacts.BuildNutrition(240, 8).calories(100).sodium(35).carbohydrate(27).build();
+		// NutritionFacts cocaCola = new NutritionFacts.BuildNutrition(240,
+		// 8).calories(100).sodium(35).carbohydrate(27).build();
 		return new NutritionFacts.BuildNutrition(2, 3).build();
-		
+
 	}
-	
+
 	/***
 	 * Make sure singleton property with private construtor and enum Type
 	 * 
 	 */
+	
+    public interface test{
+    	void getName();
+    };
+    test obj = new test(){
+
+    	int i = 10;
+    	{
+    		int j = 10;
+    	}
+		@Override
+		public void getName() {
+			System.out.println("Venkat" + i );
+			
+		}
+    	
+    };
+    
+    test obj2 = new test(){
+
+    	int i = 10;
+    	{
+    		int j = 10;
+    	}
+		@Override
+		public void getName() {
+			System.out.println("Venkat" + i );
+			
+		}
+    	
+    };
+    
+   
 }

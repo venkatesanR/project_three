@@ -1,5 +1,11 @@
 package com.datastructures.arrays;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import com.datastructures.utils.KeyValue;
 public class Rotations {
 
 	/***
@@ -45,5 +51,49 @@ public class Rotations {
 			start++;
 			end--;
 		}
+	}
+
+	// Function returns the minimum number of swaps
+	// required to sort the array
+	public static int minSwaps(int[] popularity) {
+		List<KeyValue<Integer, Integer>> list = new ArrayList<>();
+		int index = 0;
+		for (int input : popularity) {
+			KeyValue<Integer, Integer> kv = new KeyValue<Integer, Integer>(input, index);
+			list.add(kv);
+			index = index + 1;
+		}
+
+		Collections.sort(list, (o1, o2) -> {
+			if (o1.getKey() < o2.getKey()) {
+				return 1;
+			} else if (o1.getKey().equals(o2.getKey())) {
+				return 0;
+			} else {
+				return -1;
+			}
+		});
+
+		// sort by input
+
+		int count = 0;
+		Boolean[] visited = new Boolean[popularity.length];
+		Arrays.fill(visited, false);
+
+		for (int i = 0; i < popularity.length; i++) {
+			// not visited,given index
+			if (visited[i] == true || list.get(i).getValue() == i) {
+				continue;
+			}
+			int loop = 0;
+			int j = i;
+			while (!visited[j]) {
+				visited[j] = true;
+				j = list.get(j).getValue();
+				loop++;
+			}
+			count += (loop - 1);
+		}
+		return count;
 	}
 }

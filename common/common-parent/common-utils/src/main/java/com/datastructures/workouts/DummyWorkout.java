@@ -8,9 +8,10 @@ import org.apache.commons.io.FileUtils;
 
 public class DummyWorkout {
 	public static void main(String[] args) throws IOException {
-		prepareConfigFiles(
+		System.out.println(checkEquals("a",new String("a")));
+		/*prepareConfigFiles(
 				"/home/YUME.COM/vrengasamy/workspace/YFN/Yumeos/PacingService/src/main/java/com/yumecorp/pacingservice",
-				"pacingservice");
+				"pacingservice");*/
 	}
 	
 	private static void prepareConfigFiles(String baseLocation,String baseName) throws IOException {
@@ -37,5 +38,14 @@ public class DummyWorkout {
 			buffer.append(i);
 		}
 		System.out.println(buffer.toString());
+	}
+	
+	public static boolean checkEquals(String s,String r){
+		s=s.intern();
+		if(s == r){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

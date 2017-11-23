@@ -1,23 +1,47 @@
 package com.datastructures.arrays;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.commons.io.FileUtils;
-
 public class OptimaizationProblems {
 	public static void main(String[] args) throws IOException {
-		//{{}(
-	//	String data = "(}){}(}[])]]}}[]]]{((][)]])}]]{}}})}))}([([[}]({]{[]}[([]{)({[){)}){[)](()]}})(]]]))){(]})])]}])]](((}{([])(({({}{}{)({}}([])}])[)}[)[]({[{[)([[{{]]{()))([{{]{)}[({][]]]{][))]]}{)]{{({}(}}[}([[({[{{{{}((}(({((()}({{}](}[(())}]({)[((}(}][[})([}]";
-		List<String> resp = FileUtils.readLines(new File("/home/YUME.COM/vrengasamy/Desktop/input.txt"));
-		for (int index = 1; index < resp.size(); index++) {
-			System.out.println(isBalanced(resp.get(index)));
-		}
+		String eqn = "3X+2-4=23";
+		System.out.println(solveSingleVariableEqn(eqn, "X"));
+	}
 
-		//System.out.println(isBalanced(data));
+	static double solveSingleVariableEqn(String equation, String variable) {
+		String[] sign = equation.split("[0-9,"+variable+",=]");
+		String[] variables = equation.split("[-?+=]");
+		double varCoEff = 0;
+		double constant = 0;
+		boolean foundEqual = false;
+		for (int index = 0; index < variables.length; index++) {
+			String appender = "";
+			if (sign[index] != null) {
+				if (!foundEqual && (sign[index].trim() == "+" || sign[index].trim() == "")) {
+					appender = "+";
+				} else if (!foundEqual && (sign[index].trim() == "-")) {
+					appender = "-";
+				}
+				if (foundEqual && (sign[index].trim() == "+" || sign[index].trim() == "")) {
+					appender = "-";
+				} else if (foundEqual && (sign[index].trim() == "-")) {
+					appender = "+";
+				} else {
+					foundEqual = true;
+					continue;
+				}
+				if (variables[index].contains(variable)) {
+					varCoEff = varCoEff + Double.valueOf(appender.concat(variable.replace(variable, "")));
+				} else {
+					constant = constant + Double.valueOf(appender.concat(variable));
+				}
+			}
+
+		}
+		return (varCoEff > 0 ? (-constant / varCoEff) : 0.0);
 	}
 
 	static String isBalanced(String s) {
@@ -36,7 +60,7 @@ public class OptimaizationProblems {
 				if (left.contains(modC)) {
 					ls.push(modC);
 				} else if (right.contains(modC)) {
-					if(!ls.isEmpty()) {
+					if (!ls.isEmpty()) {
 						String modl = ls.pop();
 						if (left.indexOf(modl) != right.indexOf(modC)) {
 							matched = "NO";
@@ -48,7 +72,7 @@ public class OptimaizationProblems {
 					}
 				}
 			}
-			if(!ls.isEmpty())  {
+			if (!ls.isEmpty()) {
 				matched = "NO";
 			}
 			return matched;
