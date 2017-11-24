@@ -4,31 +4,33 @@ import java.util.Arrays;
 
 public class SerachAndSort {
 	public static void main(String[] args) {
-		int[] data={4,3,2,1,8};
-		//bubleSort(data);
-		//selectionSort(data);
-		insertionSort(data);
+		int[] data = { 9, 8, 7, 6, 5 };
+		// bubleSort(data);
+		// selectionSort(data);
+		// insertionSort(data);
+		mergeSort(data, 0, data.length - 1);
 		print(data);
 	}
+
 	// Sorting
 	// 1.Bubble sort O(n)=n2
 	public static void bubleSort(int[] data) {
 		for (int pass = data.length - 1; pass >= 0; pass--) {
-			for(int j=0;j<pass;j++) {
-				if(data[j]>data[j+1]) {
-					int temp=data[j];
-					data[j]=data[j+1];
-					data[j+1]=temp;
+			for (int j = 0; j < pass; j++) {
+				if (data[j] > data[j + 1]) {
+					int temp = data[j];
+					data[j] = data[j + 1];
+					data[j + 1] = temp;
 				}
 			}
 		}
 	}
-    
-	//selection sort
+
+	// selection sort
 	public static void selectionSort(int[] data) {
 		for (int i = 0; i < data.length; i++) {
 			int min = i;
-			for (int j = i+1; j < data.length - 1; j++) {
+			for (int j = i + 1; j < data.length - 1; j++) {
 				if (data[j] < data[min]) {
 					min = j;
 				}
@@ -38,15 +40,16 @@ public class SerachAndSort {
 			data[i] = temp;
 		}
 	}
+
 	// 3.Insertion sort
-	//selection sort
+	// selection sort
 	public static void insertionSort(int[] data) {
 		int v = 0, j = 0;
 		for (int i = 1; i < data.length; i++) {
-			j=i;
+			j = i;
 			v = data[i];
 			while (j >= 1 && data[j - 1] > v) {
-				data[j] = data[j-1];
+				data[j] = data[j - 1];
 				j--;
 			}
 			data[j] = v;
@@ -54,6 +57,56 @@ public class SerachAndSort {
 	}
 	// 3.Merge Sort
 
+	public static void mergeSort(int[] input, int low, int high) {
+		if (low < high) {
+			int pivot = pivot(low, high);
+			mergeSort(input, low, pivot);
+			mergeSort(input, pivot + 1, high);
+			merge(input, low, pivot, high);
+		}
+	}
+
+	private static void merge(int[] input, int low, int mid, int high) {
+		int i = 0, j = 0, k = 0;
+		int left_size = (mid - low) + 1;
+		int right_size = high - mid;
+
+		// create temp arrays
+		int[] l = new int[left_size];
+		int[] r = new int[right_size];
+		for (int a = 0; a < left_size; a++) {
+			l[a] = input[low + a];
+		}
+		for (int b = 0; b < right_size; b++) {
+			r[b] = input[mid + 1 + j];
+		}
+		/* Merge the temp arrays back into arr[l..r] */
+		i = 0; // Initial index of first subarray
+		j = 0; // Initial index of second subarray
+		k = low; // Initial index of merged subarray
+		while (i < left_size && j < right_size) {
+			if (l[i] < r[j]) {
+				input[k] = l[i];
+				i += 1;
+			} else {
+				input[k] = r[j];
+				j += 1;
+			}
+			k += 1;
+		}
+
+		//
+		while (i < left_size) {
+			input[k] = l[i];
+			i += 1;
+			k += 1;
+		}
+		while (j < right_size) {
+			input[k] = r[j];
+			j += 1;
+			k += 1;
+		}
+	}
 	// 4.Quick sort
 
 	// Searching
@@ -206,7 +259,7 @@ public class SerachAndSort {
 	}
 
 	public static int pivot(int low, int high) {
-		return (high + low) / 2;
+		return low + ((high - low) / 2);
 	}
 
 	public static void print(int[] data) {
