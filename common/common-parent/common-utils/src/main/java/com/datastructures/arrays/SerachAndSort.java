@@ -251,6 +251,26 @@ public class SerachAndSort {
 		return count + ((sum == 0 && tempSum > 0) ? 1 : 0);
 	}
 
+	
+	/**
+	 * Given an array A[] consisting 0s, 1s and 2s, write a function that sorts
+	 * A[]. The functions should put all 0s first, then all 1s and all 2s in
+	 * last.
+	 * 
+	 * Example Input = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1}; Output = {0, 0, 0,
+	 * 0, 0, 1, 1, 1, 1, 1, 2, 2}
+	 */
+	
+	public static void countSort(int[] a) {
+		// get the max value
+
+		// Initialize auxialry array to zero
+
+		// count each occurances
+		
+		//populate
+
+	}
 	// utility methods
 
 	public static int pivotElement(int[] a, int low, int high) {

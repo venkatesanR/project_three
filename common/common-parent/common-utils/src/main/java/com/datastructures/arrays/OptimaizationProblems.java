@@ -7,12 +7,26 @@ import java.util.Stack;
 
 public class OptimaizationProblems {
 	public static void main(String[] args) throws IOException {
-		String eqn = "3X+2-4=23";
-		System.out.println(solveSingleVariableEqn(eqn, "X"));
+		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		System.out.println(transmitterProblem(a, 2));
+	}
+
+	static int transmitterProblem(int[] a, int t) {
+		int total = 0;
+		int diff = 0;
+		for (int i = 1; i < a.length - 1; i++) {
+			diff = diff + a[i] - a[i - 1];
+			if (diff >= 2 * t) {
+				total += 1;
+				i=i+t;
+				diff=0;
+			}
+		}
+		return total;
 	}
 
 	static double solveSingleVariableEqn(String equation, String variable) {
-		String[] sign = equation.split("[0-9,"+variable+",=]");
+		String[] sign = equation.split("[0-9," + variable + ",=]");
 		String[] variables = equation.split("[-?+=]");
 		double varCoEff = 0;
 		double constant = 0;

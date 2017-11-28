@@ -5,6 +5,16 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Graph {
+	// enum
+	enum TRAVERSE {
+		DFS("DFS"), BFS("BFS");
+		public String description;
+
+		TRAVERSE(String description) {
+			this.description = description;
+		}
+	}
+
 	private int vertex;
 	private int edge;
 	private LinkedList<Integer>[] adj;
@@ -48,7 +58,7 @@ public class Graph {
 		while (i.hasNext()) {
 			int n = i.next();
 			if (marked[n] == 0) {
-				System.out.println("DFS: "+n);
+				System.out.println("DFS: " + n);
 				DFS(n);
 			}
 		}
@@ -72,18 +82,16 @@ public class Graph {
 		}
 	}
 
+	public void topologicalSort() {
+
+	}
+
+	public void shortestPath() {
+
+	}
+
 	@Override
 	public String toString() {
 		return null;
-	}
-
-	// enum
-	enum TRAVERSE {
-		DFS("DFS"), BFS("BFS");
-		public String description;
-
-		TRAVERSE(String description) {
-			this.description = description;
-		}
 	}
 }
