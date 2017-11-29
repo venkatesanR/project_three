@@ -7,20 +7,38 @@ import java.util.Stack;
 
 public class OptimaizationProblems {
 	public static void main(String[] args) throws IOException {
-		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int[] a = { 7, 2 ,4 ,6 ,5 ,9 ,12 ,11  };
 		System.out.println(transmitterProblem(a, 2));
 	}
 
+	/**
+	 * This approach is a brute force approach to predict
+	 * 
+	 * @param a
+	 * @param t
+	 * @return
+	 */
 	static int transmitterProblem(int[] a, int t) {
+		Arrays.sort(a);
 		int total = 0;
 		int diff = 0;
-		for (int i = 1; i < a.length - 1; i++) {
-			diff = diff + a[i] - a[i - 1];
-			if (diff >= 2 * t) {
+		int i = 1;
+		while (i < a.length) {
+			diff = diff + (a[i] - a[i - 1]);
+			if (diff > t) {
 				total += 1;
-				i=i+t;
-				diff=0;
+				int j = i;
+				diff = 0;
+				while (j+1 < a.length && diff < t) {
+					diff = diff + a[j + 1] - a[j];
+					j++;
+				}
+				i = j;
+				diff = 0;
+			} else {
+				i = i + 1;
 			}
+
 		}
 		return total;
 	}
