@@ -86,6 +86,11 @@ public class Graph {
 
 	}
 
+	/**
+	 * Need to add two algorithms for shortest 
+	 * paths vixz..;Dijktras,Bellmanford approach
+	 * 
+	 */
 	public void shortestPath() {
 
 	}
