@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -613,6 +614,7 @@ public class LogMgr {
 	public static void main(String[] args) {
 		printMsg("System.getProperties()=" + System.getProperties());
 		Logger logger = LogMgr.getLogger(LogMgr.class);
+		logger.setLevel(Level.DEBUG);
 		logger.debug("Test message issued from LogMgr.main at debug Level");
 		logger.info("Test message issued from LogMgr.main at Info  Level");
 		logger.warn("Test message issued from LogMgr.main at warn  Level");

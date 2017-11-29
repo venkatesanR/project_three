@@ -6,13 +6,13 @@ public class SinglyLinkedList<T> extends LinkedListADT<T> {
 	protected Node head;
 
 	@Override
-	public void add(Object data, int position) {
+	public void add(T data, int position) {
 		int k = 0;
 		if (head == null) {
-			head = new Node<T>((T) data, null);
+			head = new Node<T>(data, null);
 		} else if (position == 0) {
 			Node tempHead = head;
-			head = new Node<T>((T) data, tempHead);
+			head = new Node<T>(data, tempHead);
 		} else {
 			Node p = head;
 			Node q = null;
@@ -36,7 +36,7 @@ public class SinglyLinkedList<T> extends LinkedListADT<T> {
 	}
 
 	@Override
-	public void add(Object data) {
+	public void add(T data) {
 		add(data, size());
 	}
 

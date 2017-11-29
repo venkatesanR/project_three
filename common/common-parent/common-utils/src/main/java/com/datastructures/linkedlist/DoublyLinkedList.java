@@ -16,12 +16,12 @@ public class DoublyLinkedList<T> extends LinkedListADT<T> {
 	 * pointers)
 	 */
 	@Override
-	public void add(Object data, int position) {
+	public void add(T data, int position) {
 		if (head == null) {
-			head = new Node<T>((T) data, null, null);
+			head = new Node<T>(data, null, null);
 		} else if (position == 0) {
 			Node temp = head;
-			head = new Node<T>((T) data, temp, null);
+			head = new Node<T>(data, temp, null);
 		} else {
 			int k = 0;
 			Node p = head;
@@ -30,7 +30,7 @@ public class DoublyLinkedList<T> extends LinkedListADT<T> {
 				cp = p;
 				p = p.getNext();
 			}
-			cp.setNext(new Node<T>((T) data, p, cp));
+			cp.setNext(new Node<T>(data, p, cp));
 		}
 		count++;
 	}
@@ -39,7 +39,7 @@ public class DoublyLinkedList<T> extends LinkedListADT<T> {
 	 * just like SLS it will add end of the list
 	 */
 	@Override
-	public void add(Object data) {
+	public void add(T data) {
 		add(data, size());
 	}
 

@@ -7,9 +7,9 @@ package com.datastructures.linkedlist;
  */
 public abstract class LinkedListADT<T> {
 
-	public abstract void add(Object data, int position);
+	public abstract void add(T data, int position);
 
-	public abstract void add(Object data);
+	public abstract void add(T data);
 
 	public abstract void delete(int position);
 
