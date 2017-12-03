@@ -5,10 +5,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+import com.datastructures.utils.FileUtl;
+
 public class OptimaizationProblems {
 	public static void main(String[] args) throws IOException {
-		int[] a = { 7, 2 ,4 ,6 ,5 ,9 ,12 ,11  };
-		System.out.println(transmitterProblem(a, 2));
+		int[] a = { 2, 4, 5, 6, 79, 11, 12 };
+		// a = new int[] { 1, 2, 3, 4, 5 };
+		String[] input = FileUtl.readFile("/home/iris/Desktop/IRIS/projects/test_files/algorithms_input/transmitor.txt")
+				.split(" ");
+		a = new int[input.length];
+		int i = 0;
+		for (String data : input) {
+			a[i] = Integer.valueOf(data);
+			i += 1;
+		}
+		long current = System.currentTimeMillis();
+		System.out.println(transmitterProblem(a, 80));
+		System.out.println((System.currentTimeMillis() - current));
 	}
 
 	/**
@@ -19,26 +32,42 @@ public class OptimaizationProblems {
 	 * @return
 	 */
 	static int transmitterProblem(int[] a, int t) {
+
 		Arrays.sort(a);
 		int total = 0;
-		int diff = 0;
-		int i = 1;
-		while (i < a.length) {
-			diff = diff + (a[i] - a[i - 1]);
-			if (diff > t) {
-				total += 1;
+		int i = 0;
+		int leftsum = 0;
+		int rightsum = 0;
+		int lastAntena = 0;
+		while (i < a.length - 1) {
+			leftsum += (a[i + 1] - a[i]);
+			if (leftsum > t) {
+				leftsum -= (a[i + 1] - a[i]);
 				int j = i;
-				diff = 0;
-				while (j+1 < a.length && diff < t) {
-					diff = diff + a[j + 1] - a[j];
-					j++;
+				lastAntena = i;
+				while (j < a.length - 1) {
+					rightsum += (a[j + 1] - a[j]);
+					if (rightsum > t) {
+						rightsum -= (a[j + 1] - a[j]);
+						i = j;
+						break;
+					} else {
+						j++;
+					}
 				}
-				i = j;
-				diff = 0;
+				if ((leftsum + rightsum) / 2 <= t) {
+					total += 1;
+				}
+				leftsum = 0;
+				rightsum = 0;
+				i += 1;
 			} else {
-				i = i + 1;
+				i += 1;
+				continue;
 			}
-
+		}
+		if ((a[a.length - 1] - a[lastAntena] > t) || (total == 0 && leftsum >= 0)) {
+			total += 1;
 		}
 		return total;
 	}
