@@ -13,6 +13,9 @@ public class Solution {
 		String data = "Hello, eat apples?!?";
 		String[] englishWords = data.split(" ");
 		System.out.println(pigLatin("Mayank"));
+		Object[] dataO=new Object[1];
+		dataO[0]=new Solution();
+		System.out.println(Arrays.deepToString(englishWords));
 	}
 
 	private static String pigLatin(String input) {
@@ -59,5 +62,28 @@ public class Solution {
 			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * n=4
+	 *     #
+	 *    ##
+	 *   ###
+	 *  ####
+	 * @param n
+	 */
+	public static void stairCase(int n,int k) {
+		if(k<=0) {
+			return;
+		}
+		int i = 1;
+		StringBuilder builder = new StringBuilder();
+		while (i <= n) {
+			String chars = (i < k) ? " " : "#";
+			builder.append(chars);
+			i++;
+		}
+		System.out.println(builder.toString());
+		stairCase(n, k-1);
 	}
 }

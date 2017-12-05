@@ -38,8 +38,7 @@ public class Statistics {
 	}
 
 	/***
-	 * approach: 1.Sort 2.MinHeap 3.Bubble/Selection to findMax
-	 * Bubble:O(k*n)
+	 * approach: 1.Sort 2.MinHeap 3.Bubble/Selection to findMax Bubble:O(k*n)
 	 */
 	public static int kthLargest(int[] a, int k) {
 		// Bubble approach
@@ -54,10 +53,5 @@ public class Statistics {
 			}
 		}
 		return a[k - 1];
-	}
-
-	public static void main(String[] args) {
-		int[] a = { 12, 1, 87, 4, 0, 99 };
-		System.out.println(kthLargest(a, 1));
 	}
 }
