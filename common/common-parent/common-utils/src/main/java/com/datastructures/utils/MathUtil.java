@@ -15,6 +15,7 @@ public class MathUtil {
 
 	public static void main(String[] args) {
 		String input = "2X+5-3X=7-X+3";
+		long d=1000000000;
 		System.out.println(solveSingleVarEquation(input, "X"));
 	}
      
@@ -43,9 +44,6 @@ public class MathUtil {
 
 	}
 	
-	private String closestColour() {
-		
-	}
 	
 	public static float solveSingleVarEquation(String input, String variableName) {
 		String[] splited = input.split("[-+=]");

@@ -1,5 +1,7 @@
 package com.datastructures.linkedlist;
 
+import com.datastructures.utils.LinkedListUtil;
+
 /**
  * 
  * @author vrengasamy
@@ -101,7 +103,7 @@ public class CircularlyLinkedList<T> extends LinkedListADT<T> {
 	}
 	
 	public boolean isCircular() {
-		return findLast().getNext().equals(head);
+		return LinkedListUtil.loopExists(head);
 	}
 	//utility calls
 	private Node findLast() {
