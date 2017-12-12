@@ -8,6 +8,38 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class HackerRankSoultion {
+
+	public static void main(String[] args) {
+		String input = "olhackerlsrank";
+		String m = "hackerrank";
+		System.out.println(match(input.toCharArray(), m, 0, input.length() - 1, 0, m.length() - 1));
+	}
+
+	public static boolean match(char[] input, String matcher, int i, int j, int a, int b) {
+		if (a > b || (a >= matcher.length() || b < 0) || (i >= input.length || j < 0)) {
+			return true;
+		}
+		boolean foundLeft = false;
+		boolean foundRifht = false;
+		while (!(foundLeft && foundRifht) && i < j && a < b) {
+			if (!foundLeft && input[i] != matcher.charAt(a)) {
+				i++;
+			} else {
+				foundLeft = true;
+			}
+			if (!foundRifht && input[j] != matcher.charAt(b)) {
+				j--;
+			} else {
+				foundRifht = true;
+			}
+		}
+		if (foundLeft && foundRifht) {
+			return match(input, matcher, i + 1, j - 1, a + 1, b - 1);
+		} else {
+			return false;
+		}
+	}
+
 	public static String isSherLock(String s) {
 		String response = "";
 		Set<Integer> unique = new HashSet<>();
@@ -36,7 +68,7 @@ public class HackerRankSoultion {
 				response = "YES";
 			} else if ((input.length - m2) % m1 == 0 && m2 == 1) {
 				response = "YES";
-			} else if (abs == 1) { 
+			} else if (abs == 1) {
 				int count = 0;
 				for (Map.Entry<String, Integer> entry : chars.entrySet()) {
 					if (Integer.valueOf(1).equals(entry.getValue())) {
@@ -55,10 +87,5 @@ public class HackerRankSoultion {
 			response = "NO";
 		}
 		return response;
-	}
-
-	public static void main(String[] args) {
-		String data = "hfchdkkbfifgbgebfaahijchgeeeiagkadjfcbekbdaifchkjfejckbiiihegacfbchdihkgbkbddgaefhkdgccjejjaajgijdkd";
-		System.out.println(isSherLock(data));
 	}
 }
