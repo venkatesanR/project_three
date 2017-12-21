@@ -139,6 +139,21 @@ public class SerachAndSort {
 		}
 		return sorted;
 	}
+	
+    public static void count(int[] a, int bound) {
+		// get the max value
+		int[] aux = new int[bound + 1];
+		for (int i = 0; i < a.length; i++) {
+			aux[a[i]]++;
+		}
+		// populate
+		int j = 0;
+        StringBuilder builder=new StringBuilder();
+		for (int i = 0; i <= bound; i++) {
+            builder.append(String.valueOf(aux[i])).append(" ");
+		}
+        System.out.println(builder.deleteCharAt(builder.length()-1));
+	}
 
 	// Searching
 	public static int search(int[] a, int k, boolean sorted) {

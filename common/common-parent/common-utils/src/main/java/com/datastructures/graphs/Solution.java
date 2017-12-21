@@ -13,8 +13,8 @@ public class Solution {
 		g.addEdge(2, 3);
 		g.addEdge(3, 3);
 		System.out.println("Following is Depth First Traversal " + "(starting from vertex 2)");
-		g.traverse(Graph.TRAVERSE.DFS, 2);
-		g.traverse(Graph.TRAVERSE.BFS, 2);
+		g.traverse(IGraph.TRAVERSE.DFS, 2);
+		g.traverse(IGraph.TRAVERSE.BFS, 2);
 	}
 
 }

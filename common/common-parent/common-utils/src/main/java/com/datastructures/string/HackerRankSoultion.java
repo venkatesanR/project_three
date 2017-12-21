@@ -10,9 +10,26 @@ import java.util.Set;
 public class HackerRankSoultion {
 
 	public static void main(String[] args) {
-		String input = "olhackerlsrank";
-		String m = "hackerrank";
-		System.out.println(match(input.toCharArray(), m, 0, input.length() - 1, 0, m.length() - 1));
+
+	}
+	private static void test(Integer r3) {
+		r3=4;
+	}
+
+	public static void matcher(String input, String match) {
+		int ptr = 0;
+		for (char c : input.toCharArray()) {
+			if (c == match.charAt(ptr))
+				ptr++;
+			if (ptr == match.length()) {
+				break;
+			}
+		}
+		if (ptr == match.length()) {
+			System.out.println("YES");
+		} else {
+			System.out.println("NO");
+		}
 	}
 
 	public static boolean match(char[] input, String matcher, int i, int j, int a, int b) {

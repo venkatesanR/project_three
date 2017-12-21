@@ -86,4 +86,6 @@ public class Solution {
 		System.out.println(builder.toString());
 		stairCase(n, k-1);
 	}
+	
+	
 }

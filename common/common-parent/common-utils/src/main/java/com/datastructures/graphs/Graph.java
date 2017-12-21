@@ -3,17 +3,11 @@ package com.datastructures.graphs;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
+import com.datastructures.graphs.IGraph;
+import com.datastructures.graphs.IGraph.TRAVERSE;
 
 public class Graph {
 	// enum
-	enum TRAVERSE {
-		DFS("DFS"), BFS("BFS");
-		public String description;
-
-		TRAVERSE(String description) {
-			this.description = description;
-		}
-	}
 
 	private int vertex;
 	private int edge;
@@ -45,7 +39,7 @@ public class Graph {
 
 	public void traverse(TRAVERSE action, int element) {
 		Arrays.fill(marked, 0);
-		if (action.equals(TRAVERSE.DFS)) {
+		if (action.equals(IGraph.TRAVERSE.DFS)) {
 			DFS(element);
 		} else {
 			BFS(element);
@@ -87,8 +81,8 @@ public class Graph {
 	}
 
 	/**
-	 * Need to add two algorithms for shortest 
-	 * paths vixz..;Dijktras,Bellmanford approach
+	 * Need to add two algorithms for shortest paths viz..;Dijktras,Bellmanford
+	 * approach
 	 * 
 	 */
 	public void shortestPath() {
