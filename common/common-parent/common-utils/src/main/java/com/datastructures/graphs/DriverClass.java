@@ -21,7 +21,8 @@ public class DriverClass {
 			g.addEdge(Integer.valueOf(e[0]), Integer.valueOf(e[1]));
 		}
 		System.out.println(g.toString());
-		//System.out.println(g.maxDegree());
+		System.out.println(g.maxDegree());
+		System.out.println(g.selfLoops());
 
 	}
 }

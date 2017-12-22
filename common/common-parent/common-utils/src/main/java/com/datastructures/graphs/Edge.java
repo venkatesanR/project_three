@@ -1,35 +1,33 @@
 package com.datastructures.graphs;
 
 public class Edge {
-	private Vertex x;
-	private Vertex y;
+	private Vertex incident;
 	private int weight;
 
-	public Edge(Vertex x, Vertex y) {
-		this.x = x;
-		this.y = y;
+	public Edge(Vertex incident) {
+		this.incident = incident;
 	}
 
-	public Edge(Vertex x, Vertex y, int weight) {
-		this.x = x;
-		this.y = y;
+	public Edge(Vertex incident, int weight) {
+		this.incident = incident;
 		this.weight = weight;
 	}
 
-	public Vertex getX() {
-		return x;
+	public Vertex getIncident() {
+		return incident;
 	}
 
-	public void setX(Vertex x) {
-		this.x = x;
+	public void setIncident(Vertex incident) {
+		this.incident = incident;
 	}
 
-	public Vertex getY() {
-		return y;
+	public int getWeight() {
+		return weight;
 	}
 
-	public void setY(Vertex y) {
-		this.y = y;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
+
 
 }

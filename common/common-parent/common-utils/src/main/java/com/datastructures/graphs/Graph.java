@@ -67,7 +67,7 @@ public class Graph<E> {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[x], vertexs[y]));
+			vertexs[x].getAdjacent().add(getEdge(vertexs[y]));
 		} else {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
@@ -75,8 +75,8 @@ public class Graph<E> {
 			if (vertexs[y].getAdjacent() == null) {
 				vertexs[y].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[x], vertexs[y]));
-			vertexs[y].getAdjacent().add(getEdge(vertexs[y], vertexs[x]));
+			vertexs[x].getAdjacent().add(getEdge(vertexs[y]));
+			vertexs[y].getAdjacent().add(getEdge(vertexs[x]));
 		}
 		E++;
 	}
@@ -113,11 +113,7 @@ public class Graph<E> {
 					continue;
 				}
 				for (int j = 0; j < adj.size(); j++) {
-					if (!adj.get(j).getX().equals(this.vertexs[i])) {
-						builder.append("-E" + adj.get(j).getX().getIndex());
-					} else if (!adj.get(j).getY().equals(this.vertexs[i])) {
-						builder.append("-E" + adj.get(j).getY().getIndex());
-					}
+					builder.append("-E" + adj.get(j).getIncident().getIndex());
 				}
 				builder.append("\n");
 			}
@@ -152,9 +148,7 @@ public class Graph<E> {
 				continue;
 			}
 			for (int j = 0; j < adj.size(); j++) {
-				if (adj.get(j).getX().equals(this.vertexs[i])) {
-					count += 1;
-				} else if (adj.get(j).getY().equals(this.vertexs[i])) {
+				if (adj.get(j).getIncident().equals(this.vertexs[i])) {
 					count += 1;
 				}
 			}
@@ -162,11 +156,11 @@ public class Graph<E> {
 		return count / 2;
 	}
 
-	private Edge getEdge(Vertex x, Vertex y) {
-		return new Edge(x, y);
+	private Edge getEdge(Vertex y) {
+		return new Edge(y);
 	}
 
-	private Edge getEdge(Vertex x, Vertex y, int weight) {
-		return new Edge(x, y, weight);
+	private Edge getEdge(Vertex y, int weight) {
+		return new Edge(y, weight);
 	}
 }
