@@ -1,96 +1,172 @@
 package com.datastructures.graphs;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import com.datastructures.graphs.IGraph;
-import com.datastructures.graphs.IGraph.TRAVERSE;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class Graph {
-	// enum
+import javax.activity.InvalidActivityException;
 
-	private int vertex;
-	private int edge;
-	private LinkedList<Integer>[] adj;
-	private int[] marked;
+import org.apache.commons.io.FileUtils;
 
-	public Graph(int vertex) {
-		this.vertex = vertex;
-		adj = new LinkedList[vertex];
-		marked = new int[vertex];
+/**
+ * Adjacency lists are generally preferred because they efficiently represent
+ * sparse graphs. An adjacency matrix is preferred if the graph is dense, that
+ * is the number of edges |E | is close to the number of vertices squared,
+ * |V|2,<br>
+ * or if one must be able to quickly look up if there is an edge connecting two
+ * vertices.
+ * 
+ * @author vrengasamy
+ *
+ */
+public class Graph<E> {
+	private static final int DEFAULT_VERTEX = 10;
+	private int V;
+	private int E;
+	private boolean directed;
+	private Vertex[] vertexs;
+	private int lastVertex = 0;
+
+	public Graph() {
+		this.V = DEFAULT_VERTEX;
+		this.directed = false;
+		vertexs = new Vertex[DEFAULT_VERTEX];
 	}
 
-	public Integer V() {
-		return vertex;
+	public Graph(int v) {
+		this.V = v;
+		this.directed = false;
+		vertexs = new Vertex[v];
 	}
 
-	public Integer E() {
-		return edge;
+	public Graph(int v, boolean directed) {
+		this.V = v;
+		this.directed = directed;
+		vertexs = new Vertex[v];
 	}
 
-	public void addEdge(int s, int t) {
-		// assuming bi directional
-		if (adj[s] == null) {
-			adj[s] = new LinkedList<>();
+	public void addVertex(E x) throws InvalidActivityException {
+		if (lastVertex > V) {
+			throw new InvalidActivityException("You cannot add more entry than specified vertex count");
 		}
-		adj[s].add(t);
-		edge++;
+		Vertex<E> v = new Vertex<E>(x);
+		v.setData(x);
+		v.setIndex(lastVertex);
+		vertexs[lastVertex] = v;
+		lastVertex += 1;
 	}
 
-	public void traverse(TRAVERSE action, int element) {
-		Arrays.fill(marked, 0);
-		if (action.equals(IGraph.TRAVERSE.DFS)) {
-			DFS(element);
+	public void removeVertex(int x) {
+
+	}
+
+	public void addEdge(int x, int y) {
+		if (directed) {
+			if (vertexs[x].getAdjacent() == null) {
+				vertexs[x].setAdjacent(new ArrayList<>());
+			}
+			vertexs[x].getAdjacent().add(getEdge(vertexs[x], vertexs[y]));
 		} else {
-			BFS(element);
-		}
-	}
-
-	private void DFS(int v) {
-		marked[v] = 1;
-		Iterator<Integer> i = adj[v].listIterator();
-		while (i.hasNext()) {
-			int n = i.next();
-			if (marked[n] == 0) {
-				System.out.println("DFS: " + n);
-				DFS(n);
+			if (vertexs[x].getAdjacent() == null) {
+				vertexs[x].setAdjacent(new ArrayList<>());
 			}
-		}
-	}
-
-	private void BFS(int v) {
-		LinkedList<Integer> queue = new LinkedList<>();
-		marked[v] = 1;
-		queue.add(v);
-		while (!queue.isEmpty()) {
-			v = queue.poll();
-			Iterator<Integer> i = adj[v].listIterator();
-			while (i.hasNext()) {
-				int n = i.next();
-				if (marked[n] == 0) {
-					marked[n] = 1;
-					queue.add(n);
-					System.out.println(n);
-				}
+			if (vertexs[y].getAdjacent() == null) {
+				vertexs[y].setAdjacent(new ArrayList<>());
 			}
+			vertexs[x].getAdjacent().add(getEdge(vertexs[x], vertexs[y]));
+			vertexs[y].getAdjacent().add(getEdge(vertexs[y], vertexs[x]));
 		}
+		E++;
 	}
 
-	public void topologicalSort() {
-
+	public boolean removeEdge(int x, int y) {
+		return false;
 	}
 
-	/**
-	 * Need to add two algorithms for shortest paths viz..;Dijktras,Bellmanford
-	 * approach
-	 * 
-	 */
-	public void shortestPath() {
+	public boolean adjacent(int x, int y) {
+		return false;
+	}
+
+	public Collection<Vertex> neigbours(int x) {
+		return this.vertexs[x].getAdjacent();
+	}
+
+	public E getVertexValue(int x) {
+		return null;
+	}
+
+	public void setVertexValue(int x, E v) {
 
 	}
 
 	@Override
 	public String toString() {
-		return null;
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < V; i++) {
+			Vertex v = this.vertexs[i];
+			if (v != null) {
+				builder.append("V" + v.getIndex());
+				List<Edge> adj = v.getAdjacent();
+				if (adj == null || adj.isEmpty()) {
+					continue;
+				}
+				for (int j = 0; j < adj.size(); j++) {
+					if (!adj.get(j).getX().equals(this.vertexs[i])) {
+						builder.append("-E" + adj.get(j).getX().getIndex());
+					} else if (!adj.get(j).getY().equals(this.vertexs[i])) {
+						builder.append("-E" + adj.get(j).getY().getIndex());
+					}
+				}
+				builder.append("\n");
+			}
+
+		}
+		return builder.toString();
+	}
+
+	public int degree(int x) {
+		return this.vertexs[x].getAdjacent() != null ? this.vertexs[x].getAdjacent().size() : 0;
+	}
+
+	public int maxDegree() {
+		int max = 0;
+		for (int i = 0; i < V; i++) {
+			int newDeg = degree(i);
+			if (newDeg > max)
+				max = newDeg;
+		}
+		return max;
+	}
+
+	public int avgDegree() {
+		return 2 * E / V;
+	}
+
+	public int selfLoops() {
+		int count = 0;
+		for (int i = 0; i < V; i++) {
+			List<Edge> adj = this.vertexs[i].getAdjacent();
+			if (adj == null || adj.isEmpty()) {
+				continue;
+			}
+			for (int j = 0; j < adj.size(); j++) {
+				if (adj.get(j).getX().equals(this.vertexs[i])) {
+					count += 1;
+				} else if (adj.get(j).getY().equals(this.vertexs[i])) {
+					count += 1;
+				}
+			}
+		}
+		return count / 2;
+	}
+
+	private Edge getEdge(Vertex x, Vertex y) {
+		return new Edge(x, y);
+	}
+
+	private Edge getEdge(Vertex x, Vertex y, int weight) {
+		return new Edge(x, y, weight);
 	}
 }
