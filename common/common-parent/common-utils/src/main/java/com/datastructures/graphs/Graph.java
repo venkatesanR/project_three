@@ -1,14 +1,10 @@
 package com.datastructures.graphs;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.activity.InvalidActivityException;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * Adjacency lists are generally preferred because they efficiently represent
@@ -47,12 +43,23 @@ public class Graph<E> {
 		vertexs = new Vertex[v];
 	}
 
+	public int getV() {
+		return V;
+	}
+
+	public int getE() {
+		return E;
+	}
+
+	public boolean isDirected() {
+		return directed;
+	}
+
 	public void addVertex(E x) throws InvalidActivityException {
 		if (lastVertex > V) {
 			throw new InvalidActivityException("You cannot add more entry than specified vertex count");
 		}
 		Vertex<E> v = new Vertex<E>(x);
-		v.setData(x);
 		v.setIndex(lastVertex);
 		vertexs[lastVertex] = v;
 		lastVertex += 1;
@@ -62,12 +69,12 @@ public class Graph<E> {
 
 	}
 
-	public void addEdge(int x, int y) {
+	public void addEdge(int x, int y,E cost) {
 		if (directed) {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[y]));
+			vertexs[x].getAdjacent().add(getEdge(vertexs[y],cost));
 		} else {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
@@ -75,8 +82,8 @@ public class Graph<E> {
 			if (vertexs[y].getAdjacent() == null) {
 				vertexs[y].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[y]));
-			vertexs[y].getAdjacent().add(getEdge(vertexs[x]));
+			vertexs[x].getAdjacent().add(getEdge(vertexs[y],cost));
+			vertexs[y].getAdjacent().add(getEdge(vertexs[x],cost));
 		}
 		E++;
 	}
@@ -89,12 +96,16 @@ public class Graph<E> {
 		return false;
 	}
 
-	public Collection<Vertex> neigbours(int x) {
+	public Collection<Edge> neigbours(int x) {
 		return this.vertexs[x].getAdjacent();
 	}
 
+	public Vertex getVertex(int x) {
+		return this.vertexs[x];
+	}
+
 	public E getVertexValue(int x) {
-		return null;
+		return (E) this.vertexs[x].getData();
 	}
 
 	public void setVertexValue(int x, E v) {
@@ -160,7 +171,7 @@ public class Graph<E> {
 		return new Edge(y);
 	}
 
-	private Edge getEdge(Vertex y, int weight) {
+	private Edge getEdge(Vertex y, E weight) {
 		return new Edge(y, weight);
 	}
 }

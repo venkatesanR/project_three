@@ -1,14 +1,14 @@
 package com.datastructures.graphs;
 
-public class Edge {
+public class Edge<T> {
 	private Vertex incident;
-	private int weight;
+	private T weight;
 
 	public Edge(Vertex incident) {
 		this.incident = incident;
 	}
 
-	public Edge(Vertex incident, int weight) {
+	public Edge(Vertex incident, T weight) {
 		this.incident = incident;
 		this.weight = weight;
 	}
@@ -21,11 +21,11 @@ public class Edge {
 		this.incident = incident;
 	}
 
-	public int getWeight() {
+	public T getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(T weight) {
 		this.weight = weight;
 	}
 
