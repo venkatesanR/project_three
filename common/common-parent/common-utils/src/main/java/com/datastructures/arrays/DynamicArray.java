@@ -1,23 +1,17 @@
 package com.datastructures.arrays;
 
-import java.util.List;
+import java.util.Scanner;
 
 public class DynamicArray {
-
-	private static void dynamicArray(int N, String[] querys, List<String> seqList) {
-		int lastAnswer = 0;
-		for (String query : querys) {
-			String[] axy = query.split(" ");
-			int a = Integer.valueOf(axy[0]);
-			int x = Integer.valueOf(axy[1]);
-			int y = Integer.valueOf(axy[2]);
-			int seqIndex = ((x ^ lastAnswer) % N);
-			String squence = seqList.get(seqIndex);
-			if (a == 1) {
-				
-			} else {
-
-			}
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		int m = in.nextInt();
+		for (int a0 = 0; a0 < m; a0++) {
+			int a = in.nextInt();
+			int b = in.nextInt();
+			int k = in.nextInt();
 		}
+		in.close();
 	}
 }

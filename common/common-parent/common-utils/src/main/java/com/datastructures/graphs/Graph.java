@@ -17,7 +17,7 @@ import javax.activity.InvalidActivityException;
  * @author vrengasamy
  *
  */
-public class Graph<E> {
+public class Graph<E, T extends Number> {
 	private static final int DEFAULT_VERTEX = 10;
 	private int V;
 	private int E;
@@ -69,12 +69,12 @@ public class Graph<E> {
 
 	}
 
-	public void addEdge(int x, int y,E cost) {
+	public void addEdge(int x, int y, T cost) {
 		if (directed) {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[y],cost));
+			vertexs[x].getAdjacent().add(getEdge(vertexs[y], cost));
 		} else {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
@@ -82,8 +82,8 @@ public class Graph<E> {
 			if (vertexs[y].getAdjacent() == null) {
 				vertexs[y].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[y],cost));
-			vertexs[y].getAdjacent().add(getEdge(vertexs[x],cost));
+			vertexs[x].getAdjacent().add(getEdge(vertexs[y], cost));
+			vertexs[y].getAdjacent().add(getEdge(vertexs[x], cost));
 		}
 		E++;
 	}
@@ -171,7 +171,7 @@ public class Graph<E> {
 		return new Edge(y);
 	}
 
-	private Edge getEdge(Vertex y, E weight) {
+	private Edge getEdge(Vertex y, T weight) {
 		return new Edge(y, weight);
 	}
 }

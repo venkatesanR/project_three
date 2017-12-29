@@ -24,7 +24,13 @@ public class DriverClass {
 			g.addEdge(Integer.valueOf(e[0]), Integer.valueOf(e[1]),
 					DATA.getDistance(Integer.valueOf(e[0]).intValue(), Integer.valueOf(e[1]).intValue()));
 		}
-		// System.out.println(g.toString());
-		System.out.println(GraphSearchUtil.search(g, 0, 6));
+		System.out.println("---------- DFS START----------------------");
+		GraphSearchUtil.DFS(g, 2);
+		System.out.println("---------- DFS END------------------------");
+
+		System.out.println("---------- BFS START----------------------");
+		GraphSearchUtil.BFS(g, 2);
+		System.out.println("---------- BFS END------------------------");
+
 	}
 }

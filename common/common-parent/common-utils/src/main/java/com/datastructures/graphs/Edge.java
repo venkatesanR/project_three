@@ -1,6 +1,6 @@
 package com.datastructures.graphs;
 
-public class Edge<T> {
+public class Edge<T extends Number> {
 	private Vertex incident;
 	private T weight;
 
@@ -28,6 +28,5 @@ public class Edge<T> {
 	public void setWeight(T weight) {
 		this.weight = weight;
 	}
-
 
 }
