@@ -65,10 +65,6 @@ public class Graph<E, T extends Number> {
 		lastVertex += 1;
 	}
 
-	public void removeVertex(int x) {
-
-	}
-
 	public void addEdge(int x, int y, T cost) {
 		if (directed) {
 			if (vertexs[x].getAdjacent() == null) {
@@ -87,7 +83,22 @@ public class Graph<E, T extends Number> {
 		}
 		E++;
 	}
+	public Collection<Edge> neigbours(int x) {
+		return this.vertexs[x].getAdjacent();
+	}
 
+	public Vertex getVertex(int x) {
+		return this.vertexs[x];
+	}
+	
+	public E getVertexValue(int x) {
+		return (E) this.vertexs[x].getData();
+	}
+
+	public void removeVertex(int x) {
+
+	}
+	
 	public boolean removeEdge(int x, int y) {
 		return false;
 	}
@@ -96,22 +107,17 @@ public class Graph<E, T extends Number> {
 		return false;
 	}
 
-	public Collection<Edge> neigbours(int x) {
-		return this.vertexs[x].getAdjacent();
-	}
-
-	public Vertex getVertex(int x) {
-		return this.vertexs[x];
-	}
-
-	public E getVertexValue(int x) {
-		return (E) this.vertexs[x].getData();
-	}
-
 	public void setVertexValue(int x, E v) {
 
 	}
 
+	private Edge getEdge(Vertex y) {
+		return new Edge(y);
+	}
+
+	private Edge getEdge(Vertex y, T weight) {
+		return new Edge(y, weight);
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -165,13 +171,5 @@ public class Graph<E, T extends Number> {
 			}
 		}
 		return count / 2;
-	}
-
-	private Edge getEdge(Vertex y) {
-		return new Edge(y);
-	}
-
-	private Edge getEdge(Vertex y, T weight) {
-		return new Edge(y, weight);
 	}
 }

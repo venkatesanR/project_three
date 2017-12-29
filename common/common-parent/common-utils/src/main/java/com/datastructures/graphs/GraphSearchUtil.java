@@ -1,9 +1,20 @@
 package com.datastructures.graphs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
+import java.util.Stack;
+import java.util.concurrent.PriorityBlockingQueue;
+
+import com.datastructures.utils.ArrayUtils;
 
 public class GraphSearchUtil {
 	static boolean[] visited = null;
@@ -48,6 +59,33 @@ public class GraphSearchUtil {
 				visited[e.getIncident().getIndex()] = true;
 			}
 		}
+	}
+
+	public static long[] dijkstras(Graph g, int source) {
+		Queue<Vertex> queue = new PriorityQueue<Vertex>();
+		queue.add(g.getVertex(source));
+		long[] distance=new long[g.getV()];
+		for (int i = 0; i < g.getV(); i++) {
+			g.getVertex(i).setDistance(-1);
+			distance[i]=-1;
+		}
+		g.getVertex(source).setDistance(0);
+		while (!queue.isEmpty()) {
+			Vertex u = queue.remove();
+			List<Edge> adj = u.getAdjacent();
+			if (adj == null || adj.isEmpty()) {
+				continue;
+			}
+			for (Edge v : adj) {
+				long distancex = (long) (u.getDistance() + v.getWeight().longValue());
+				if (v.getIncident().getDistance() == -1 || v.getIncident().getDistance() > distancex) {
+					g.getVertex(v.getIncident().getIndex()).setDistance(distancex);
+					queue.add(g.getVertex(v.getIncident().getIndex()));
+					distance[v.getIncident().getIndex()]=distancex;
+				}
+			}
+		}
+		return distance;
 	}
 
 }

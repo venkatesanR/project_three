@@ -2,11 +2,12 @@ package com.datastructures.graphs;
 
 import java.util.List;
 
-public class Vertex<E> {
+public class Vertex<E> implements Comparable<Vertex<E>> {
 	private E data;
 	private List<Edge> adjacent;
 	private int index;
-	
+	private double distance;
+
 	public Vertex(E data) {
 		this.data = data;
 	}
@@ -33,6 +34,24 @@ public class Vertex<E> {
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	@Override
+	public int compareTo(Vertex<E> o) {
+		if (o.getDistance() > this.distance) {
+			return -1;
+		} else if (o.getDistance() < this.distance) {
+			return 1;
+		}
+		return 0;
 	}
 
 }
