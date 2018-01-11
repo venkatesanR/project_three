@@ -4,15 +4,31 @@ import java.util.Arrays;
 
 public class SerachAndSort {
 	public static void main(String[] args) {
-		int[] data = { 1, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
+		int[] data = {2 ,1 ,3 ,1, 2};
 		// bubleSort(data);
 		// selectionSort(data);
 		// insertionSort(data);
 		// data=countSort(data,2);
 		// mergeSort(data, 0, data.length - 1);
-		print(data);
+		iReverse(data, 6);
 	}
 
+	public static void iReverse(int[] arr, int n) {
+		int v = 0, j = 0;
+		for (int i = 1; i < arr.length; i++) {
+			j = i;
+			v = arr[i];
+			while (j >= 1 && arr[j - 1] > v) {
+				arr[j] = arr[j - 1];
+				j--;
+			}
+			arr[j] = v;
+			print(arr);
+			System.out.println();
+		}
+	}
+	
+	
 	// Sorting
 	// 1.Bubble sort O(n)=n2
 	public static void bubleSort(int[] data) {
@@ -51,11 +67,14 @@ public class SerachAndSort {
 			v = data[i];
 			while (j >= 1 && data[j - 1] > v) {
 				data[j] = data[j - 1];
+				print(data);
+				System.out.println();
 				j--;
 			}
 			data[j] = v;
 		}
 	}
+
 	// 3.Merge Sort
 
 	public static void mergeSort(int[] input, int low, int high) {

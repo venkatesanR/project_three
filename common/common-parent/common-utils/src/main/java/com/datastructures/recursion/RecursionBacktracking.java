@@ -5,14 +5,15 @@ import java.math.BigInteger;
 import com.datastructures.utils.ArrayUtils;
 
 public class RecursionBacktracking {
-	static int[] data = null;
+	static int[] data = { 0, 1, 2, 3, 4, 6 };
 
 	private RecursionBacktracking() {
 
 	}
 
 	public static void main(String[] args) {
-		System.out.println(bigFibbo(5, 0, 1));
+		// System.out.println(bigFibbo(5, 0, 1));
+		drawKNumbers(data.length, 3);
 	}
 
 	/**
@@ -93,7 +94,7 @@ public class RecursionBacktracking {
 	 */
 	public static void drawKNumbers(int n, int k) {
 		if (n < 1) {
-			ArrayUtils.print(data);
+			System.out.println(ArrayUtils.print(data));
 		} else {
 			for (int j = 0; j < k; j++) {
 				data[n - 1] = j;

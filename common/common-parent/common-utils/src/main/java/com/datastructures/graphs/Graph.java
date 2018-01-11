@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.activity.InvalidActivityException;
-
 /**
  * Adjacency lists are generally preferred because they efficiently represent
  * sparse graphs. An adjacency matrix is preferred if the graph is dense, that
@@ -18,29 +16,25 @@ import javax.activity.InvalidActivityException;
  *
  */
 public class Graph<E, T extends Number> {
-	private static final int DEFAULT_VERTEX = 10;
 	private int V;
 	private int E;
 	private boolean directed;
 	private Vertex[] vertexs;
-	private int lastVertex = 0;
-
-	public Graph() {
-		this.V = DEFAULT_VERTEX;
-		this.directed = false;
-		vertexs = new Vertex[DEFAULT_VERTEX];
-	}
+	private long[][] path = null;
+	private int index = 0;
 
 	public Graph(int v) {
 		this.V = v;
 		this.directed = false;
 		vertexs = new Vertex[v];
+		path = new long[v][v];
 	}
 
 	public Graph(int v, boolean directed) {
 		this.V = v;
 		this.directed = directed;
 		vertexs = new Vertex[v];
+		path = new long[v][v];
 	}
 
 	public int getV() {
@@ -55,21 +49,19 @@ public class Graph<E, T extends Number> {
 		return directed;
 	}
 
-	public void addVertex(E x) throws InvalidActivityException {
-		if (lastVertex > V) {
-			throw new InvalidActivityException("You cannot add more entry than specified vertex count");
-		}
+	public void addVertex(E x) {
 		Vertex<E> v = new Vertex<E>(x);
-		v.setIndex(lastVertex);
-		vertexs[lastVertex] = v;
-		lastVertex += 1;
+		v.setIndex(index);
+		vertexs[index] = v;
+		index += 1;
 	}
 
-	public void addEdge(int x, int y, T cost) {
+	public void addEdge(int x, int y, T cost, boolean keepSmallest) {
 		if (directed) {
 			if (vertexs[x].getAdjacent() == null) {
 				vertexs[x].setAdjacent(new ArrayList<>());
 			}
+			path[x][y] = cost.longValue();
 			vertexs[x].getAdjacent().add(getEdge(vertexs[y], cost));
 		} else {
 			if (vertexs[x].getAdjacent() == null) {
@@ -78,11 +70,16 @@ public class Graph<E, T extends Number> {
 			if (vertexs[y].getAdjacent() == null) {
 				vertexs[y].setAdjacent(new ArrayList<>());
 			}
-			vertexs[x].getAdjacent().add(getEdge(vertexs[y], cost));
-			vertexs[y].getAdjacent().add(getEdge(vertexs[x], cost));
+			if (!keepSmallest || (keepSmallest && (path[x][y] == 0 || path[x][y] > cost.longValue()))) {
+				path[x][y] = cost.longValue();
+				path[y][x] = cost.longValue();
+				vertexs[x].getAdjacent().add(getEdge(vertexs[y], cost));
+				vertexs[y].getAdjacent().add(getEdge(vertexs[x], cost));
+			}
 		}
 		E++;
 	}
+
 	public Collection<Edge> neigbours(int x) {
 		return this.vertexs[x].getAdjacent();
 	}
@@ -90,25 +87,9 @@ public class Graph<E, T extends Number> {
 	public Vertex getVertex(int x) {
 		return this.vertexs[x];
 	}
-	
+
 	public E getVertexValue(int x) {
 		return (E) this.vertexs[x].getData();
-	}
-
-	public void removeVertex(int x) {
-
-	}
-	
-	public boolean removeEdge(int x, int y) {
-		return false;
-	}
-
-	public boolean adjacent(int x, int y) {
-		return false;
-	}
-
-	public void setVertexValue(int x, E v) {
-
 	}
 
 	private Edge getEdge(Vertex y) {
@@ -118,6 +99,7 @@ public class Graph<E, T extends Number> {
 	private Edge getEdge(Vertex y, T weight) {
 		return new Edge(y, weight);
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -137,39 +119,5 @@ public class Graph<E, T extends Number> {
 
 		}
 		return builder.toString();
-	}
-
-	public int degree(int x) {
-		return this.vertexs[x].getAdjacent() != null ? this.vertexs[x].getAdjacent().size() : 0;
-	}
-
-	public int maxDegree() {
-		int max = 0;
-		for (int i = 0; i < V; i++) {
-			int newDeg = degree(i);
-			if (newDeg > max)
-				max = newDeg;
-		}
-		return max;
-	}
-
-	public int avgDegree() {
-		return 2 * E / V;
-	}
-
-	public int selfLoops() {
-		int count = 0;
-		for (int i = 0; i < V; i++) {
-			List<Edge> adj = this.vertexs[i].getAdjacent();
-			if (adj == null || adj.isEmpty()) {
-				continue;
-			}
-			for (int j = 0; j < adj.size(); j++) {
-				if (adj.get(j).getIncident().equals(this.vertexs[i])) {
-					count += 1;
-				}
-			}
-		}
-		return count / 2;
 	}
 }
