@@ -7,12 +7,6 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 
 public class DummyWorkout {
-	public static void main(String[] args) throws IOException {
-		System.out.println(checkEquals("a",new String("a")));
-		/*prepareConfigFiles(
-				"/home/YUME.COM/vrengasamy/workspace/YFN/Yumeos/PacingService/src/main/java/com/yumecorp/pacingservice",
-				"pacingservice");*/
-	}
 	
 	private static void prepareConfigFiles(String baseLocation,String baseName) throws IOException {
 		String[] javaExtn = new String[] { "java" };
@@ -47,5 +41,21 @@ public class DummyWorkout {
 		}else{
 			return false;
 		}
+	}
+	public static void main(String[] args) throws IOException {
+		int a=5,b=3,n=5;
+		printSequence(a, b, n);
+	}
+	
+	public static void printSequence(int a,int b,int n) {
+		long sum=a;
+		for(int i=0;i<n;i++) {
+			sum+=getVal(a,b,i);
+			System.out.println(sum);
+		}
+	}
+	private static long getVal(int a,int b,int n) {
+		long l=Double.valueOf(String.valueOf(Math.pow(2, n))).longValue();
+		return (b*l);
 	}
 }

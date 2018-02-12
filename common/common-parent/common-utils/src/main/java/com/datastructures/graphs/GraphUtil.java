@@ -166,18 +166,17 @@ public class GraphUtil {
 	}
 
 	/**
-	 * Concept : Shortest Path in Unweighted Graph Let s be the input vertex from which we
-	 * want to find the shortest path to all other vertices. Unweighted graph is
-	 * a special case of the weighted shortest-path problem, with all edges a
-	 * weight of 1. The algorithm is similar to BFS and we need to use the
-	 * following data structures: • • A distance table with three columns (each
-	 * row corresponds to a vertex): ○ Distance from source vertex. ○ Path –
-	 * contains the name of the vertex through which we get the shortest
-	 * distance. A queue is used to implement breadth-first search. It contains
-	 * vertices whose distance from the source node has been computed and their
-	 * adjacent vertices are to be examined. As an example, consider the
-	 * following graph and its adjacency list representation.
-	 *  Directed
+	 * Concept : Shortest Path in Unweighted Graph Let s be the input vertex
+	 * from which we want to find the shortest path to all other vertices.
+	 * Unweighted graph is a special case of the weighted shortest-path problem,
+	 * with all edges a weight of 1. The algorithm is similar to BFS and we need
+	 * to use the following data structures: • • A distance table with three
+	 * columns (each row corresponds to a vertex): ○ Distance from source
+	 * vertex. ○ Path – contains the name of the vertex through which we get the
+	 * shortest distance. A queue is used to implement breadth-first search. It
+	 * contains vertices whose distance from the source node has been computed
+	 * and their adjacent vertices are to be examined. As an example, consider
+	 * the following graph and its adjacency list representation. Directed
 	 * 
 	 */
 	public static long[] shortestPathUnweighted(Graph g, int source) {
@@ -205,5 +204,13 @@ public class GraphUtil {
 			}
 		}
 		return distance;
+	}
+
+	public static long[] singleSourceOccurances(long[] input) {
+		long[] response = new long[input.length];
+		for (int i = 0; i < input.length; i++) {
+			response[(int) input[i]]++;
+		}
+		return response;
 	}
 }

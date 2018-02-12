@@ -1,6 +1,5 @@
 package com.datastructures.arrays;
 
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class ConnectedRegions {
@@ -26,25 +25,25 @@ public class ConnectedRegions {
 		int result = connectedCell(matrix);
 		System.out.println(result);
 		add(new Number() {
-			
+
 			@Override
 			public long longValue() {
 				// TODO Auto-generated method stub
 				return 0;
 			}
-			
+
 			@Override
 			public int intValue() {
 				// TODO Auto-generated method stub
 				return 0;
 			}
-			
+
 			@Override
 			public float floatValue() {
 				// TODO Auto-generated method stub
 				return 0;
 			}
-			
+
 			@Override
 			public double doubleValue() {
 				// TODO Auto-generated method stub
@@ -54,9 +53,10 @@ public class ConnectedRegions {
 		in.close();
 	}
 
-	private static <T extends Number> void add(T  d) {
+	private static <T extends Number> void add(T d) {
 		System.out.println(d.doubleValue());
 	}
+
 	private static int connectedCell(int[][] matrix) {
 		visited = new boolean[n][m];
 		arr = matrix;
@@ -72,7 +72,7 @@ public class ConnectedRegions {
 
 	// Place to connect All 1s in Array
 	public static void matchRegion(int i, int j) {
-		if(visited[i][j]) {
+		if (visited[i][j]) {
 			return;
 		}
 		visited[i][j] = true;
@@ -83,14 +83,14 @@ public class ConnectedRegions {
 			max = count;
 		}
 		for (int x = 0; x < location.length; x++) {
-			i1 = i+location[x][0];
-			j1 = j+location[x][1];
+			i1 = i + location[x][0];
+			j1 = j + location[x][1];
 			int val = getValue(i1, j1);
 			if (val > 0 && !visited[i1][j1]) {
 				matchRegion(i1, j1);
 			}
 		}
-		count=0;
+		count = 0;
 		visited[i][j] = false;
 	}
 

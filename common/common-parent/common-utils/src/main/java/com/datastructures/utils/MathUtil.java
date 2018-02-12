@@ -14,11 +14,12 @@ public class MathUtil {
 	}
 
 	public static void main(String[] args) {
-		String input = "2X+5-3X=7-X+3";
-		long d=1000000000;
-		System.out.println(solveSingleVarEquation(input, "X"));
+		System.out.println(countFactor(1000000,2));
 	}
-     
+    
+	public static int countFactor(int N, int divisable) {
+		return 0;
+	}
 	private static String winner(String[] votes) {
 		Map<String, Long> votesMap = new HashMap<String, Long>();
 		for (String name : votes) {

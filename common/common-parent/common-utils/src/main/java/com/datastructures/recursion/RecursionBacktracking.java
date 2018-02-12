@@ -1,19 +1,22 @@
 package com.datastructures.recursion;
 
 import java.math.BigInteger;
+import java.util.Scanner;
+
+import javax.activity.InvalidActivityException;
 
 import com.datastructures.utils.ArrayUtils;
 
 public class RecursionBacktracking {
-	static int[] data = { 0, 1, 2, 3, 4, 6 };
+	private static final int[] data = new int[] { 0, 1, 2, 3, 4, 5, 6 };
+	private static final int[] RUNS = new int[] { 0, 1, 2, 3, 4, 5, 6 };
+	private static final int[] PASSWORD = new int[] { 0, 1, 2, 3, 4, 5, 6 };
 
-	private RecursionBacktracking() {
-
-	}
-
-	public static void main(String[] args) {
-		// System.out.println(bigFibbo(5, 0, 1));
-		drawKNumbers(data.length, 3);
+	private static int N;
+	private static int M;
+	private static int max=1000;
+	private RecursionBacktracking() throws InvalidActivityException {
+		throw new InvalidActivityException();
 	}
 
 	/**
@@ -69,19 +72,6 @@ public class RecursionBacktracking {
 		}
 	}
 
-	/**
-	 * Actually Idea here was to implement recursive solution to Identify
-	 * serious count as mentioned below. N=Actual Number k=power N=a^k+b^k+...
-	 * prove(if k=2) 10=1^2+3^2=10(count=2)
-	 * 
-	 * @param result
-	 * @param power
-	 * @return
-	 */
-	public static int powerSum(int result, int power) {
-		return 0;
-	}
-
 	public static void printFibbonaci(int max) {
 
 	}
@@ -121,5 +111,64 @@ public class RecursionBacktracking {
 		}
 		return result;
 	}
+
+	/**
+	 * Actually Idea here was to implement recursive solution to Identify
+	 * serious count as mentioned below. N=Actual Number k=power N=a^k+b^k+...
+	 * prove(if k=2) 10=1^2+3^2=10(count=2)
+	 * 
+	 * @param result
+	 * @param power
+	 * @return
+	 */
+	
+	public static void passwordMathcher(int N, int M, String[] posibility) {
+	}
+
+	private static void printAllCombinations(int N, int M, int[] posibility) {
+		if (M == 0) {
+			int sum = 0;
+			for (int l : posibility) {
+				sum += l;
+			}
+			if (max > sum) {
+				max = sum;
+			}
+			System.out.println(ArrayUtils.print(posibility));
+		} else {
+			for (int i = 0; i < RUNS.length; i++) {
+				posibility[M - 1] = RUNS[i];
+				printAllCombinations(N, M - 1, posibility);
+			}
+		}
+	}
+	private static final BigInteger TEN=new BigInteger("10");
+
+    static int digitSum(String n, int k) {
+        String[] a1=n.split("");
+        int sum=k*recursiveSum(a1,0,0);
+        while(sum>10) {
+            String[] a2=String.valueOf(sum).split("");
+            sum=recursiveSum(a2,0,0);
+        }
+        return sum;
+    }
+
+    static int recursiveSum(String[] input,int sum,int count) {
+        if(count==input.length) {
+            return sum;
+        } else {
+            sum=Integer.valueOf(input[count])+recursiveSum(input,sum,count+1);
+        }
+        return sum;
+    }
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String n = in.next();
+        int k = in.nextInt();
+        int result = digitSum(n, k);
+        System.out.println(result);
+        in.close();
+    }
 
 }

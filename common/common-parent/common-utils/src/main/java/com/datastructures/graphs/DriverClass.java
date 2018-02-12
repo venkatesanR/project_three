@@ -27,6 +27,7 @@ public class DriverClass {
 		}
 		int s = Integer.valueOf(details.get(details.size() - 1));
 		long[] data=GraphUtil.shortestPathUnweighted(g, s-1);
+		data=GraphUtil.singleSourceOccurances(data);
 		for(int i=0;i<data.length;i++) {
 			if(i!=s-1) {
 				System.out.println(data[i]);

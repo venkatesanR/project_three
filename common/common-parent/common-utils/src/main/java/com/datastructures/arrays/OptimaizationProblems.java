@@ -23,6 +23,7 @@ public class OptimaizationProblems {
 		System.out.println(transmitterProblem(a, 80));
 		System.out.println((System.currentTimeMillis() - current));
 	}
+	
 
 	/**
 	 * This approach is a brute force approach to predict

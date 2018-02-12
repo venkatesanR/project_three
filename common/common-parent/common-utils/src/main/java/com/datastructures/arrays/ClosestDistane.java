@@ -39,7 +39,7 @@ public class ClosestDistane {
 			response[index] = color;
 			index += 1;
 		}
-		for(int i=0;i<response.length;i++) {
+		for (int i = 0; i < response.length; i++) {
 			System.out.println(response[i]);
 		}
 	}
@@ -67,10 +67,14 @@ public class ClosestDistane {
 			g1 = 0;
 			b1 = 255;
 		}
-		int r = (r1 - r2) * (r1 - r2);
-		int g = (g1 - g2) * (g1 - g2);
-		int b = (b1 - b2) * (b1 - b2);
+		int r = getDiffSquare(r1, r2);
+		int g = getDiffSquare(g1, g2);
+		int b = getDiffSquare(b1, b2);
 		return Math.sqrt(r + g + b);
 
+	}
+
+	private static int getDiffSquare(int r1, int r2) {
+		return (r1 - r2) * (r1 - r2);
 	}
 }
