@@ -1,7 +1,6 @@
 package com.jmodule.threads;
 
 public class ThreadDetail {
-
 	public synchronized void printThreadDetails(String name) {
 		System.out.println("User Output :" + name);
 		System.out.println("Thread ID :" + Thread.currentThread().getId());
