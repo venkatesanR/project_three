@@ -1,10 +1,8 @@
 package com.jmodule.threads;
 
+import com.jmodule.threads.SchedulerResponse;
+
 public interface IScheduler {
-	public void init();
-
-	public void schedule();
-
 	public SchedulerResponse kill(Long taskId);
 
 	public SchedulerResponse pauseTask(Long taskId);
