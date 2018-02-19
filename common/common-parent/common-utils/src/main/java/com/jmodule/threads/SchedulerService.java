@@ -1,21 +1,18 @@
 package com.jmodule.threads;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.PriorityQueue;
 
 public class SchedulerService implements IScheduler {
 	private static final int MAX_THREAD_COUNT = 5;
-	private Runnable DEAMON_THREAD = null;
+	private Thread DEAMON_THREAD = null;
 	private SchedulerHelper helper;
-	private final Queue<Task> TASK_QUEUE = new LinkedList<>();
-	private boolean killAll;
+	private final PriorityQueue<Task> TASK_QUEUE = new PriorityQueue<>();
 
 	public SchedulerService() {
 		helper = new SchedulerHelper(MAX_THREAD_COUNT);
-		DEAMON_THREAD = new Runnable() {
+		Runnable service = new Runnable() {
 			public void run() {
-				while (!killAll) {
+				while (true) {
 					try {
 						synchronized (TASK_QUEUE) {
 							while (TASK_QUEUE.size() == 0)
@@ -32,7 +29,9 @@ public class SchedulerService implements IScheduler {
 				}
 			}
 		};
-		new Thread(DEAMON_THREAD).start();
+		DEAMON_THREAD = new Thread(service);
+		DEAMON_THREAD.setDaemon(true);
+		DEAMON_THREAD.start();
 	}
 
 	@Override
