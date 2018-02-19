@@ -10,11 +10,12 @@ public class SchedulerService implements IScheduler {
 	private SchedulerHelper helper;
 	private final Queue<Task> TASK_QUEUE = new LinkedList<>();
 	private boolean killAll;
+
 	public SchedulerService() {
-		helper=new SchedulerHelper(MAX_THREAD_COUNT);
+		helper = new SchedulerHelper(MAX_THREAD_COUNT);
 		DEAMON_THREAD = new Runnable() {
 			public void run() {
-				while(!killAll) {
+				while (!killAll) {
 					try {
 						synchronized (TASK_QUEUE) {
 							while (TASK_QUEUE.size() == 0)
@@ -40,11 +41,6 @@ public class SchedulerService implements IScheduler {
 	}
 
 	@Override
-	public final SchedulerResponse pauseTask(final Long taskId) {
-		return null;
-	}
-
-	@Override
 	public final SchedulerResponse addTask(final Task task) {
 		synchronized (TASK_QUEUE) {
 			TASK_QUEUE.add(task);
@@ -54,18 +50,9 @@ public class SchedulerService implements IScheduler {
 	}
 
 	@Override
-	public final SchedulerResponse removeTask(final Long taskId) {
-		return null;
-	}
-
-	@Override
-	public final SchedulerResponse killAll() {
+	public final void killAll() {
+		System.out.println("Forcibly stopping all Tasks");
 		Runtime.getRuntime().exit(0);
-		return new SchedulerResponse(JobStatusEnum.STOPPED.getMessage());
 	}
 
-	@Override
-	public final Task getCurrentTask() {
-		return null;
-	}
 }
