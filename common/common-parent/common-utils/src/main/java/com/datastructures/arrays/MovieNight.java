@@ -1,6 +1,5 @@
 package com.datastructures.arrays;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

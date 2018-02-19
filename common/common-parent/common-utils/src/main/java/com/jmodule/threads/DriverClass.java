@@ -11,9 +11,7 @@ package com.jmodule.threads;
  */
 public class DriverClass {
 	public static void main(String[] args) {
-		Thread t = new SampleThread("Effective JAVA");
-		Thread t2 = new Thread(new SampleRunnable("Effective JAVA2"));
-		t.start();
-		t2.start();
+		SchedulerService scheduler = new SchedulerService();
+		scheduler.addTask(new SampleTask());
 	}
 }
