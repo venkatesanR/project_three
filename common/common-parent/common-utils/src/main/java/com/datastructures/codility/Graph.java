@@ -6,11 +6,16 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * City connection Solution Codility
+ * 
+ * @author vrengasamy
+ *
+ */
 public class Graph {
 	private List<Integer>[] adj;
 	private int V;
 	private int E;
-	private int[] distances;
 
 	public Graph(int v) {
 		adj = new List[v];
@@ -54,7 +59,7 @@ public class Graph {
 		long[] distanceSummary = new long[9];
 		int[] edge = { 9, 1, 4, 9, 0, 4, 8, 9, 0, 1 };
 		int source = -1;
-		
+
 		for (int i = 0; i < edge.length; i++) {
 			if (edge[i] != i) {
 				g.addEdge(i, edge[i]);
