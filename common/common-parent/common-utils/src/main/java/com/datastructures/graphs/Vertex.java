@@ -53,5 +53,4 @@ public class Vertex<E> implements Comparable<Vertex<E>> {
 		}
 		return 0;
 	}
-
 }
