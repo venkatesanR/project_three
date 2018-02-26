@@ -3,11 +3,11 @@
   <component name="ScalaSbtSettings">
     <option name="linkedExternalProjectsSettings">
       <SbtProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/spark-scala" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/spark-scala" />
+            <option value="$PROJECT_DIR$/spark-scala/project" />
           </set>
         </option>
         <option name="sbtVersion" value="0.13.16" />

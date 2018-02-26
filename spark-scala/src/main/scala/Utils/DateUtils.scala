@@ -103,6 +103,10 @@ object DateUtils {
 
   }
 
+  def getMonth(): Unit ={
+
+  }
+  //etc
   def stringToDate(): Unit ={
 
   }
@@ -130,8 +134,6 @@ object DateUtils {
 
 
   def main(args: Array[String]): Unit = {
-    val outputFormat = "yyyy-MM-dd hh:mm:ss"
-    println(currentTime(outputFormat))
-    //println(dateAdd("2017-10-21 10:10:10", 4, outputFormat, "yyyy-MM-dd"))
+    dayOfMonth("2017-05-01","yyyy-MM-dd")
   }
 }

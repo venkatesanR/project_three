@@ -7,7 +7,7 @@ object EvenOrOdd {
 
   def evenOrOdd(): Unit = {
     println("Enter the number ... ")
-    if (readInt() % 2 == 0) println("Even") else println("odd"
+    if (readInt() % 2 == 0) println("Even") else println("odd")
 
       // bit shifting
   }
