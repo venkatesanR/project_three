@@ -152,7 +152,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-driver-version}</version>
 		</dependency>
-
+		<!-- hibernate and its associate dependency-->
 		<dependency>
 			<groupId>antlr</groupId>
 			<artifactId>antlr</artifactId>

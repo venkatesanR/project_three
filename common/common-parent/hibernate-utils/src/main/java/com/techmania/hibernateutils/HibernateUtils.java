@@ -16,7 +16,7 @@ public class HibernateUtils {
 	static {
 		//TODO Make this as Configurable by Load classpath:* (cfg.xml )
 		try {
-			sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+			sessionFactory = new Configuration().configure("src/main/resources/hibernate.cfg.xml").buildSessionFactory();
 		} catch (Throwable ex) {
 			LOGGER.debug("********************** Initial SessionFactory creation failed.", ex);
 			throw new ExceptionInInitializerError(ex);

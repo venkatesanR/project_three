@@ -16,6 +16,7 @@ public class AbstractDatabaseManager implements TransactionPhases {
 	}
 
 	public <T> void save(T input) {
+		boolean failed=false;
 		Session session = null;
 		try {
 			session = HibernateConnectionManager.makeConnection();
@@ -23,8 +24,12 @@ public class AbstractDatabaseManager implements TransactionPhases {
 			session.save(input);
 			session.getTransaction().commit();
 		} catch (Throwable root) {
+			failed=true;
 			throw new HibernateException("Error while doing AbstractDatabaseManager > save", root);
 		} finally {
+			if(failed) {
+				session.getTransaction().rollback();
+			}
 			if (session != null) {
 				HibernateConnectionManager.closeConnection();
 			}
