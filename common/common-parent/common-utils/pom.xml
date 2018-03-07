@@ -12,4 +12,11 @@
 	<artifactId>common-utils</artifactId>
 	<name>common-utils</name>
 	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+	</dependencies>
 </project>
