@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Scanner;
 
 /**
  * City connection Solution Codility
@@ -13,16 +14,11 @@ import java.util.Queue;
  *
  */
 public class Graph {
-	private List<Integer>[] adj;
-	private int V;
-	private int E;
+	private static List<Integer>[] adj;
+	private static int V;
+	private static int E;
 
-	public Graph(int v) {
-		adj = new List[v];
-		this.V = v;
-	}
-
-	public void addEdge(int a, int b) {
+	public static void addEdge(int a, int b) {
 		if (adj[a] == null) {
 			adj[a] = new ArrayList<Integer>();
 		}
@@ -33,7 +29,7 @@ public class Graph {
 		adj[b].add(a);
 	}
 
-	public long[] dijikstra(int source) {
+	public static long[] dijikstra(int source) {
 		Queue<Integer> queue = new PriorityQueue<>();
 		queue.add(source);
 		long[] distance = new long[V];
@@ -55,19 +51,22 @@ public class Graph {
 	}
 
 	public static void main(String[] args) {
-		Graph g = new Graph(10);
+		Scanner scan = new java.util.Scanner(System.in);
+		int n = scan.nextInt();
+		adj = new List[n];
+		V = n;
+		
 		long[] distanceSummary = new long[9];
-		int[] edge = { 9, 1, 4, 9, 0, 4, 8, 9, 0, 1 };
 		int source = -1;
-
-		for (int i = 0; i < edge.length; i++) {
-			if (edge[i] != i) {
-				g.addEdge(i, edge[i]);
+		for (int i = 0; i < n; i++) {
+			int edgeValue = scan.nextInt();
+			if (edgeValue != i) {
+				addEdge(i, edgeValue);
 			} else {
 				source = i;
 			}
 		}
-		long[] distance = g.dijikstra(source);
+		long[] distance = dijikstra(source);
 		for (int i = 0; i < distance.length; i++) {
 			if (distance[i] > 0) {
 				distanceSummary[(int) (distance[i] - 1)]++;
@@ -76,5 +75,6 @@ public class Graph {
 		for (long dis : distanceSummary) {
 			System.out.println(dis);
 		}
+		scan.close();
 	}
 }
