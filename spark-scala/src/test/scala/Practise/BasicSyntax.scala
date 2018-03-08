@@ -1,6 +1,7 @@
 package Practise
 
 import scala.collection.immutable
+import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks._
 import scala.io.StdIn._
 
@@ -135,6 +136,10 @@ object BasicSyntax {
         \\ --> introduce slash
         \a --> alerts
      */
+
+    val a: String = "mohana"
+    val b: String = "krishn"
+    for(i<- 0 to a.length-1)print(s"${a(i)}${b(i)}")  // concatenate two characters , result will be as "mkorhiasnhan"
   }
 
   def StringOperations(): Unit ={
@@ -180,6 +185,11 @@ object BasicSyntax {
         println("Hi how are you")
       }
       sayHi
+
+      def f(n:Int):Unit = {
+        (1 to n).foreach (_ => println("Hello World"))
+      }
+      f(n)
      */
 
     /*
@@ -250,11 +260,21 @@ object BasicSyntax {
 
   }
 
+  def arrayOperations(): Unit ={
+    // Array Initialization
+    val intArr: Array[Int] = new Array[Int](5)
+    val stringArr: Array[String] = Array("Mohana","krishna")
+
+    // ArrayBuffer Initialization
+      // import statement needed : "import scala.collection.mutable.ArrayBuffer"
+    val stringArrBuff: ArrayBuffer[String] = new ArrayBuffer[String]()
+  }
 
 
 
   def main(args: Array[String]): Unit = {
     //breaksInLoops() - Need to debug this method, some ways to print elements are not working
+    whileLoop()
 
   }
 
