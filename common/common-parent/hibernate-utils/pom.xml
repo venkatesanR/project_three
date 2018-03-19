@@ -8,9 +8,9 @@
 		<artifactId>common-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>com.techmania.hibernate</groupId>
-	<artifactId>hibernate-utils</artifactId>
-	<name>hibernate-utils</name>
+	<groupId>com.addval</groupId>
+	<artifactId>addval-utils</artifactId>
+	<name>addval-utils</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,15 +18,17 @@
 		<common-entity-version>1.0-SNAPSHOT</common-entity-version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/commons-digester/commons-digester -->
 		<dependency>
-			<groupId>com.techmania.common</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>${common-entity-version}</version>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>2.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.techmania.entity</groupId>
-			<artifactId>common-entity</artifactId>
-			<version>${common-entity-version}</version>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

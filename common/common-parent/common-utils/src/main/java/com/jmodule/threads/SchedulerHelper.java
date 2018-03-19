@@ -7,6 +7,7 @@ public class SchedulerHelper {
 	private int defaultPoolSize;
 	private ScheduledThreadPoolExecutor scheduleExecutor = null;
 
+	
 	public SchedulerHelper(int defaultPoolSize) {
 		if (scheduleExecutor == null) {
 			this.defaultPoolSize = defaultPoolSize;
@@ -47,5 +48,17 @@ public class SchedulerHelper {
 		};
 		return runnable;
 	}
+	
+	public void caller() {
+		SchedulerHelper sH = new SchedulerHelper(0);
+		sH.metho();
+	}
 
+	public void metho() throws ArrayIndexOutOfBoundsException  {
+		if(true) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		throw new ProcessException("test", null);
+	}
+	
 }

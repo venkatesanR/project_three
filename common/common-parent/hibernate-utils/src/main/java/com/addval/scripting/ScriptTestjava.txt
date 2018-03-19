@@ -1,0 +1,297 @@
+/*
+ * ScriptTest.java
+ *
+ * Created on December 4, 2006, 12:15 PM
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
+package javatest;
+
+import java.util.*;
+import com.addval.scripting.*;
+import com.addval.utils.*;
+
+/**
+ * Test class to test various aspects of the scripting language.
+ * Prints fibonacci sequenceof n numbers given the seed numbers
+ * @author ravi
+ */
+public class ScriptTest {
+    
+    /** Creates a new instance of ScriptTest */
+    public ScriptTest() {
+    }
+    
+    public static void main(String[] args)
+    {
+        ScriptTest stst = new ScriptTest();
+        //stst.test();
+        //stst.test2();
+        stst.test3();
+    }
+    
+    private void test()
+    {
+        try{
+            String s = this.getScript();
+            Duration d = new Duration();
+            d.startNow();
+            ScriptInterpreter interpreter = ScriptParser.parse(s);
+            d.endNow();
+            System.out.println("Parse time = " + d.getMilliSeconds() + "ms");
+            d.startNow();
+            MyAppData data = new MyAppData(0, 1);
+            interpreter.execute(data);
+            d.endNow();
+            System.out.println("\nExec time = " + d.getMilliSeconds() + "ms");
+            
+            d.startNow();
+            data = new MyAppData(0, 1);
+            interpreter.execute(data);
+            d.endNow();
+            System.out.println("\nExec time = " + d.getMilliSeconds() + "ms");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }        
+    }
+    
+    private void test2()
+    {
+        try{
+            String s = this.getScript2();
+            Duration d = new Duration();
+            d.startNow();
+            Parser parser = new Parser(s);
+            parser.parse();
+            d.endNow();
+            System.out.println("Parse time = " + d.getMilliSeconds() + "ms");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }        
+    }    
+    
+    private void test3()
+    {
+        try{
+            String s = this.getScript4();
+            Duration d = new Duration();
+            d.startNow();
+            ScriptInterpreter interpreter = ScriptParser.parse(s);
+            d.endNow();
+            System.out.println("Parse time = " + d.getMilliSeconds() + "ms");
+            
+            d.startNow();
+            MyAppData data = new MyAppData(0, 1);
+            interpreter.execute(data);
+            d.endNow();
+            System.out.println("\nExec time = " + d.getMilliSeconds() + "ms");
+            
+            d.startNow();
+            data = new MyAppData(0, 1);
+            interpreter.execute(data);
+            d.endNow();
+            System.out.println("\nExec time = " + d.getMilliSeconds() + "ms");            
+            
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }        
+    }        
+           
+    private String getScript2()
+    {
+        String script = 
+            "function ComputeNextNbr class:javatest.ScriptTest$TstFnComputeNextNumber reuse:true {" +
+                "configparam SEQ_LENGTH (4)" +
+            "}" +
+            "function PrintNbr class:javatest.ScriptTest$TstFnPrintNumber reuse:true;" +
+            "function abcd class:javatest.ScriptTest$TstFnPrintNumber reuse:true;" +
+            "function efgh class:javatest.ScriptTest$TstFnComputeNextNumber reuse:false {" +
+                "configparam SEQ_LENGTH (4)" +
+                "configparam TEST (a, cdd, 4 ) " +
+            "}" +            
+            "loopvars SeqNbr, test1, test3;" +
+            "{" +
+                "loop{" +
+                    "ComputeNextNbr{" +
+                        "result:DONE break;" +
+                    "}" +
+                "}" +
+            
+                 "loop SeqNbr{" +
+                            "PrintNbr;" +                                                              
+                 "}" +
+                 "abcd{result:a{abcd;abcd; end;} result:b break; result:c end; " +
+                        "result:d {loop test1{abcd; abcd; } efgh; } } " +
+                 "PrintNbr;" +
+            "}";
+       
+        return script;
+    }   
+    
+    private String getScript3()
+    {
+        String script = 
+            "# fibonacci alg\n" +
+            "function ComputeNextNbr class:javatest.ScriptTest$TstFnComputeNextNumber reuse:true\n" +
+            "result : DONE, NOT_DONE\n" +
+            "{\n" +
+                "configparam SEQ_LENGTH (5)\n" +
+            "}\n" +
+            "function PrintNbr class:javatest.ScriptTest$TstFnPrintNumber reuse:true result:any;\n" +
+            "loopvars SeqNbr;\n" +
+            "localfunction lf1 { ComputeNextNbr; PrintNbr; }\n" +
+            "localfunction lf2 { ComputeNextNbr; PrintNbr; return abcd;}\n" +
+            "{\n" +
+                "loop{\n" +
+                    "ComputeNextNbr{\n" +
+                        "# check result\n" +
+                        "result:DONE break;\n #break when the sequence length is met \n" +
+                    "}\n" +
+                "}\n" +
+            
+                 "loop SeqNbr{\n" +
+                            "PrintNbr;\n" +  
+                 "}\n" +
+            "}\n";
+        
+        return script;
+    }    
+    
+    private String getScript4()
+    {
+        String script = 
+            "# fibonacci alg\n" +
+            "function ComputeNextNbr class:javatest.ScriptTest$TstFnComputeNextNumber reuse:true\n" +
+            "result : DONE, NOT_DONE\n" +
+            "{\n" +
+                "configparam SEQ_LENGTH (3)\n" +
+            "}\n" +
+            "function PrintNbr class:javatest.ScriptTest$TstFnPrintNumber reuse:true result:any;\n" +
+            "loopvars SeqNbr;\n" +
+            "localfunction lf1 {\n" +
+                "loop{\n" +
+                    "ComputeNextNbr{\n" +
+                        "# check result\n" +
+                        "result:DONE return DONE;\n #break when the sequence length is met \n" +
+                    "}\n" +
+                "}\n" +
+            "}\n" +            
+            "localfunction lf2 {\n" +
+                 "loop SeqNbr{\n" +
+                            "PrintNbr;\n" +  
+                 "}\n" +
+            "}\n" +
+            "localfunction lf3 { lf1{result:DONE { lf2; } } }" +
+            "{\n" +
+                 "lf3;\n" +      
+            "}\n";
+        
+        return script;
+    }        
+        
+    public static class TstFnComputeNextNumber extends AFunctionImpl
+    {
+        public String executeImpl(AppData appdata)
+        {
+            //System.out.println("\nTstFnComputeNextNumber");
+            MyAppData mad = (MyAppData)appdata;
+            
+            //get the config param for the size of seq
+            //String[] vals = this.getFuncConfigParamValues("SEQ_LENGTH");
+            Set vals = this.getFuncConfigParamValues("SEQ_LENGTH");
+            //int seqLen = Integer.parseInt(vals[0]);
+            int seqLen = Integer.parseInt((String)vals.iterator().next());
+            if(seqLen == mad.getSequenceLength())return "DONE";
+            
+            int[] last2 = mad.getLast2SeqNums();
+            int next = last2[0] + last2[1];
+            mad.addToSequence(next);
+            return "NOT_DONE";
+        }
+        
+        public AFunctionImpl newInstance()
+        {
+            TstFnComputeNextNumber newFn = new TstFnComputeNextNumber();
+            //newFn.setFuncInfo(this.getFuncInfo());
+            return newFn;
+        }
+        
+    }
+    
+    public static class TstFnPrintNumber extends AFunctionImpl
+    {
+        public String executeImpl(AppData appdata)
+        {            
+            MyAppData mad = (MyAppData)appdata;
+            
+            Integer num = (Integer)mad.getCurrentLoopObject();
+            System.out.print(num);
+            System.out.print(", ");
+            
+            return "PRINTED";
+        }
+        
+        public AFunctionImpl newInstance()
+        {
+            TstFnPrintNumber newFn = new TstFnPrintNumber();
+            //newFn.setFuncInfo(this.getFuncInfo());
+            return newFn;
+        }
+        
+    }    
+        
+    public static class MyAppData extends AppData
+    {
+        private int _seed0;
+        private int _seed1;
+        
+        private ArrayList _fibSeq = new ArrayList();
+        
+        public MyAppData(int seed0, int seed1){
+            _seed0 = seed0;
+            _seed1 = seed1;
+            _fibSeq.add(new Integer(_seed0));
+            _fibSeq.add(new Integer(_seed1));
+        }
+        
+        public int getSequenceLength()
+        {
+            return _fibSeq.size();
+        }
+        
+        public Iterator getLoopVarIterator(String loopVar)
+        {
+            return _fibSeq.iterator();
+            /*
+            return new Iterator(){
+                public Object next(){
+                    return null;
+                }
+                
+                public boolean hasNext(){
+                    return false;
+                }
+                
+                public void remove(){
+                    throw new UnsupportedOperationException();
+                }
+            };
+             */
+        }
+        
+        public void addToSequence(int num){
+            _fibSeq.add(new Integer(num));
+        }
+        
+        public int[] getLast2SeqNums()
+        {
+            return new int[]{((Integer)_fibSeq.get(_fibSeq.size() - 2)).intValue(), 
+                    ((Integer)_fibSeq.get(_fibSeq.size() - 1)).intValue()};
+        }
+    }          
+}

@@ -9,8 +9,7 @@ import org.apache.commons.io.FileUtils;
 public class DriverClass {
 	public static void main(String[] args) throws IOException {
 		@SuppressWarnings("unchecked")
-		List<String> details = FileUtils.readLines(new File(
-				"/home/YUME.COM/vrengasamy/intelijworkspace/project_three/common/common-parent/test_files/graph.txt"));
+		List<String> details = FileUtils.readLines(new File("tree.txt"));
 		String[] ve = details.get(0).split(" ");
 		int v = Integer.valueOf(ve[0]);
 		int e1=Integer.valueOf(ve[1]);;
