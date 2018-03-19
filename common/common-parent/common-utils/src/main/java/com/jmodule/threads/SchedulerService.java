@@ -1,12 +1,15 @@
 package com.jmodule.threads;
 
 import java.util.PriorityQueue;
+import java.util.Properties;
 
 public class SchedulerService implements IScheduler {
-	private static final int MAX_THREAD_COUNT = 5;
+	private int MAX_THREAD_COUNT = 5;
+	private Properties systemProperties;
+
 	private Thread DEAMON_THREAD = null;
 	private SchedulerHelper helper;
-	private final PriorityQueue<Task> TASK_QUEUE = new PriorityQueue<>();
+	private PriorityQueue<Task> TASK_QUEUE = new PriorityQueue<>();
 
 	public SchedulerService() {
 		helper = new SchedulerHelper(MAX_THREAD_COUNT);
@@ -54,4 +57,19 @@ public class SchedulerService implements IScheduler {
 		Runtime.getRuntime().exit(0);
 	}
 
+	public void systemConfig() {
+		this.systemProperties = null;
+	}
+
+	public void init() {
+		MAX_THREAD_COUNT=(int) systemProperties.get(ServerProperty.MAX_THREAD);
+	}
+
+	public void initializeListeners() {
+	}
+
+	public void createSystemObjects() {
+		TASK_QUEUE=new PriorityQueue<>();
+		helper = new SchedulerHelper(MAX_THREAD_COUNT);
+	}
 }

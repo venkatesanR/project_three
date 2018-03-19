@@ -7,7 +7,6 @@ public class SchedulerHelper {
 	private int defaultPoolSize;
 	private ScheduledThreadPoolExecutor scheduleExecutor = null;
 
-	
 	public SchedulerHelper(int defaultPoolSize) {
 		if (scheduleExecutor == null) {
 			this.defaultPoolSize = defaultPoolSize;
@@ -16,7 +15,9 @@ public class SchedulerHelper {
 	}
 
 	public void execute(final Task task) {
-		scheduleExecutor.execute(buildRunnable(task));
+		synchronized (task) {
+			scheduleExecutor.execute(buildRunnable(task));
+		}
 	}
 
 	private Runnable buildRunnable(Task task) {
@@ -24,8 +25,8 @@ public class SchedulerHelper {
 			@Override
 			public void run() {
 				synchronized (task) {
-					List fromRead;
-					List processed;
+					final List fromRead;
+					final List processed;
 					try {
 						fromRead = task.read();
 					} catch (Throwable t) {
@@ -48,17 +49,4 @@ public class SchedulerHelper {
 		};
 		return runnable;
 	}
-	
-	public void caller() {
-		SchedulerHelper sH = new SchedulerHelper(0);
-		sH.metho();
-	}
-
-	public void metho() throws ArrayIndexOutOfBoundsException  {
-		if(true) {
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		throw new ProcessException("test", null);
-	}
-	
 }
