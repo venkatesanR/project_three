@@ -5,32 +5,18 @@ import java.util.Stack;
 
 public class LargestRectangle {
 	static long largestRectangle(int[] h) {
-		Stack<Long> rectangleSize = new Stack();
-		int size = h.length;
-		int lastHeight = h[0];
-		for (int i = 0; i < h.length; i++) {
-			int height = h[i];
-			int localIteration = (height - lastHeight);
-			if (localIteration == 0) {
-				if (rectangleSize.isEmpty() || (!rectangleSize.isEmpty() && rectangleSize.peek() < height * size)) {
-					rectangleSize.push(new Long(height * size));
-				}
+		Stack<Building> buildings = new Stack<Building>();
+		for (int i = 1; i <= h.length; i++) {
+			// push if empty
+			if (buildings.isEmpty()) {
+				buildings.push(new Building(h[i - 1]));
 			} else {
-				for (int j = 1; j <= localIteration; j++) {
-					int localHeight = lastHeight + j;
-					if (rectangleSize.isEmpty()) {
-						rectangleSize.push(new Long(localHeight * size));
-					}
-					if (rectangleSize.peek() < localHeight * size) {
-						rectangleSize.push(new Long(localHeight * size));
-					}
-				}
+				Building previous = buildings.peek();
+				
 			}
 
-			lastHeight = height;
-			size -= 1;
 		}
-		return rectangleSize.peek();
+		return 0;
 	}
 
 	public static void main(String[] args) {
@@ -43,5 +29,24 @@ public class LargestRectangle {
 		long result = largestRectangle(h);
 		System.out.println(result);
 		in.close();
+	}
+
+	static class Building {
+		int data;
+		int count;
+		long area;
+
+		public Building(int data) {
+			this.data = data;
+			this.count = 1;
+		}
+
+		public void increment() {
+			this.count += 1;
+		}
+
+		public long area() {
+			return count * data;
+		}
 	}
 }
