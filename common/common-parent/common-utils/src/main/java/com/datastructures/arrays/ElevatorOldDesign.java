@@ -60,30 +60,16 @@ public class ElevatorOldDesign {
 		int Y = 200;
 		// 5
 		System.out.println(solution(A, B, M, X, Y));
-/*
-		A = new int[] { 40, 40, 100, 80, 20 };
-		B = new int[] { 3, 3, 2, 2, 3 };
-		M = 3;
-		X = 5;
-		Y = 200;
-		// 6
-		System.out.println(solution(A, B, M, X, Y));
-
-		A = new int[] { 40, 40, 100, 200, 20 };
-		B = new int[] { 3, 3, 2, 2, 3 };
-		M = 3;
-		X = 5;
-		Y = 200;
-		// 7
-		System.out.println(solution(A, B, M, X, Y));
-
-		A = new int[] { 40, 40, 100, 200, 20 };
-		B = new int[] { 3, 3, 2, 2, 3 };
-		M = 3;
-		X = 1;
-		Y = 200;
-		// 10
-		System.out.println(solution(A, B, M, X, Y));*/
+		/*
+		 * A = new int[] { 40, 40, 100, 80, 20 }; B = new int[] { 3, 3, 2, 2, 3 }; M =
+		 * 3; X = 5; Y = 200; // 6 System.out.println(solution(A, B, M, X, Y));
+		 * 
+		 * A = new int[] { 40, 40, 100, 200, 20 }; B = new int[] { 3, 3, 2, 2, 3 }; M =
+		 * 3; X = 5; Y = 200; // 7 System.out.println(solution(A, B, M, X, Y));
+		 * 
+		 * A = new int[] { 40, 40, 100, 200, 20 }; B = new int[] { 3, 3, 2, 2, 3 }; M =
+		 * 3; X = 1; Y = 200; // 10 System.out.println(solution(A, B, M, X, Y));
+		 */
 	}
 }
 
