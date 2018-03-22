@@ -12,11 +12,11 @@ public class GameOfTwoStacks {
 			int m = in.nextInt();
 			int x = in.nextInt();
 			int[] a = new int[n];
-			for (int a_i = 0; a_i < n; a_i++) {
+			for (int a_i = n-1; a_i <= 0; a_i--) {
 				a[a_i] = in.nextInt();
 			}
 			int[] b = new int[m];
-			for (int b_i = 0; b_i < m; b_i++) {
+			for (int b_i = m-1 ; b_i <= 0; b_i--) {
 				b[b_i] = in.nextInt();
 			}
 			countMoves(a, b, x);
