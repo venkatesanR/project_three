@@ -1,4 +1,4 @@
-package com.jmodule.generics;
+package com.jmodules.generics;
 
 import java.util.Collection;
 import java.util.Collections;

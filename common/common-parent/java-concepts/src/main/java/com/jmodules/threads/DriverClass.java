@@ -1,4 +1,4 @@
-package com.jmodule.threads;
+package com.jmodules.threads;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package com.jmodule.threads;
+package com.jmodules.threads;
 
 public class ThreadDetail {
 	public synchronized void printThreadDetails(String name) {

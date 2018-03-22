@@ -1,6 +1,6 @@
-package com.jmodule.threads;
+package com.jmodules.threads;
 
-import com.jmodule.threads.SchedulerResponse;
+import com.jmodules.threads.SchedulerResponse;
 
 public interface IScheduler {
 	public SchedulerResponse kill(Long taskId);

@@ -1,4 +1,4 @@
-package com.jmodule.threads;
+package com.jmodules.threads;
 
 public enum JobStatusEnum {
 	SCHEDULED(1, "Scheduled"), RUNNING(2, "Running"), STOPPED(2, "Stopped"), ERROR(4, "Error");

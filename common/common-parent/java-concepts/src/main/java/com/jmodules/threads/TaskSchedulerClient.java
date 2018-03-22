@@ -1,4 +1,4 @@
-package com.jmodule.threads;
+package com.jmodules.threads;
 
 public class TaskSchedulerClient {
 	private final SchedulerService schedulerService;
