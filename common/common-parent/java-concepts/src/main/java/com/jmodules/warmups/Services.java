@@ -1,4 +1,4 @@
-package com.jmodules.bestpractice;
+package com.jmodules.warmups;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

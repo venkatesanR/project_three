@@ -1,4 +1,4 @@
-package com.jmodules.bestpractice;
+package com.jmodules.warmups;
 
 public class NutritionFacts {
 	private final int servingSize;

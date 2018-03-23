@@ -1,4 +1,4 @@
-package com.jmodules.bestpractice;
+package com.jmodules.warmups;
 
 
 
@@ -69,6 +69,7 @@ public class ObjectCreation {
     public interface test{
     	void getName();
     };
+    
     test obj = new test(){
 
     	int i = 10;

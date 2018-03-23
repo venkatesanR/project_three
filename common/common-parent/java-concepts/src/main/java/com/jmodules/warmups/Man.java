@@ -1,4 +1,4 @@
-package com.jmodules.bestpractice;
+package com.jmodules.warmups;
 
 import java.util.Set;
 

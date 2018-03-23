@@ -1,4 +1,4 @@
-package com.jmodules.bestpractice;
+package com.jmodules.warmups;
 
 final class SimpleClass {
 
