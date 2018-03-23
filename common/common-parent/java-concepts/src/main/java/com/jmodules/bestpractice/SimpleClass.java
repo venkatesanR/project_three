@@ -24,7 +24,6 @@ final class SimpleClass {
 
 	{
 		logMe = 13;
-
 	}
 
 	// static intializers(checked exceptions should not thrown)
