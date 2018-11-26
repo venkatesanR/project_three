@@ -1,5 +1,0 @@
-package Parser
-
-object XLSXparser {
-
-}

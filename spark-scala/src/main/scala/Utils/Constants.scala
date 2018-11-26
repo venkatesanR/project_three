@@ -1,5 +1,0 @@
-package Utils
-
-object Constants {
-
-}
