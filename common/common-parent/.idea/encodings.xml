@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-entity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/datastructures" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/designprinciples" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hadoop-ecosys" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/java-concepts" charset="UTF-8" />
+  </component>
+</project>
