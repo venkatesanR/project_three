@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.InvalidArgumentException;
 
 public class MathUtil {
 	private MathUtil() {
@@ -70,7 +69,7 @@ public class MathUtil {
 			}
 		}
 		if (coEffVar == 0.0f) {
-			throw new InvalidArgumentException("Cannot diveded by Zero Because co-efficient sum is zero");
+			//throw new InvalidArgumentException("Cannot diveded by Zero Because co-efficient sum is zero");
 		}
 		return -(constant / coEffVar);
 	}
