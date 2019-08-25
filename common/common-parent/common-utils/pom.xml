@@ -1,15 +1,23 @@
 <?xml version="1.0"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.techland</groupId>
-		<artifactId>common-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
-	<groupId>com.techmania.common</groupId>
-	<artifactId>common-utils</artifactId>
-	<name>common-utils</name>
-	<url>http://maven.apache.org</url>
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.techland</groupId>
+        <artifactId>common-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.techmania.common</groupId>
+    <artifactId>common-utils</artifactId>
+    <name>common-utils</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>com.techmania.entity</groupId>
+            <artifactId>common-entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
 </project>

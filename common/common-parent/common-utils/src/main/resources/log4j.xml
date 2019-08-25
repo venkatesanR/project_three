@@ -2,25 +2,32 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-	<!-- As part of ACE Basic 4.0 migration (4.0.26) -->
-	<appender name="COMMON_LOGGING" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="Threshold" value="debug" />
-		<param name="Append" value="true" />
-		<param name="File" value="D:\project\project_three\logs\common_log_filter.log" />
-		<param name="DatePattern" value="'.'yyyy-MM-dd-HH" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />
-		</layout>
-	</appender>
+    <!-- Usual webserver Appender to server.log -->
+    <appender name="logfile" class="org.apache.log4j.FileAppender">
+        <param name="Threshold" value="INFO"/>
+        <param name="File" value="logs/server.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{ABSOLUTE} (%x) %c{1} - %m%n"/>
+        </layout>
+    </appender>
 
-	<!-- For production change all debugs and infos to error -->
-	<logger name="com.techmania">
-		<level value="debug" />
-	</logger>
+    <!-- The new LogRequestAppender -->
+    <appender name="logrequest" class="com.flurry.util.logRequest.LogRequestAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{ABSOLUTE} (%x) %c{1} - %m%n"/>
+        </layout>
+    </appender>
 
-	<!-- Classes that log a lot and are turned off in QA as well -->
-	<root>
-		<priority value="info" />
-		<appender-ref ref="COMMON_LOGGING" />
-	</root>
+    <!-- Top-Level Logger that we might want debug logs from -->
+    <logger name="com.techmania">
+        <level value="debug"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="debug"/>
+        <appender-ref ref="logfile"/>
+        <appender-ref ref="logrequest"/>
+    </root>
+
 </log4j:configuration>

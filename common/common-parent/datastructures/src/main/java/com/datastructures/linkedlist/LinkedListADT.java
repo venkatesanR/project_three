@@ -5,17 +5,16 @@ package com.datastructures.linkedlist;
  *
  * @param <T>
  */
-public abstract class LinkedListADT<T> {
+public interface LinkedListADT<Type> {
+    public void add(Type data, int position);
 
-	public abstract void add(T data, int position);
+    public void add(Type data);
 
-	public abstract void add(T data);
+    public void delete(int position);
 
-	public abstract void delete(int position);
+    public void delete();
 
-	public abstract void delete();
+    public void flush();
 
-	public abstract void flush();
-	
-	public abstract int size();
+    public int size();
 }

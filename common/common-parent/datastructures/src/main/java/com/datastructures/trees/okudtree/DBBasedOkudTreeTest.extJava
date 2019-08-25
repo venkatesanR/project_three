@@ -1,0 +1,297 @@
+/*
+ * DbBasedOkudTreeTest.java
+ *
+ * Created on May 25, 2006, 10:00 AM
+ *
+ * An example implementation class of lazy loaded,
+ * db based OkudTree with a discardable level.
+ */
+
+import com.addval.utils.*;
+import com.addval.dbutils.*;
+import com.addval.utils.trees.*;
+import com.datastructures.trees.okudtree.AOkudTreeNode;
+import com.datastructures.trees.okudtree.IOkudTreeHelper;
+import com.datastructures.trees.okudtree.OkudTree;
+import com.datastructures.trees.okudtree.OkudTreeLeafNode;
+import com.datastructures.trees.okudtree.OkudTreeLevel;
+import com.datastructures.trees.okudtree.OkudTreeNode;
+import com.datastructures.trees.okudtree.OkudTreeSearch;
+
+import java.util.*;
+import java.sql.*;
+
+/**
+ * @author ravi
+ */
+public class DbBasedOkudTreeTest {
+
+    /**
+     * Creates a new instance of DbBasedOkudTreeTest
+     */
+    public DbBasedOkudTreeTest() {
+
+    }
+
+    public static void main(String[] args) throws Exception {
+        DbBasedOkudTreeTest test = new DbBasedOkudTreeTest();
+        OkudTree tree = test.createTree();
+        test.searchTree(tree);
+        System.gc();
+        System.out.println("Used mem = " + (Runtime.getRuntime().totalMemory() -
+                Runtime.getRuntime().freeMemory()) / 1024.0 + " K");
+        System.out.println(tree.toString(true));
+    }
+
+    public OkudTree createTree() {
+        OkudTree tree = new OkudTree(makeLevels(),
+                new DbBasedOkudTreeHelper(),
+                true, new Pair(new Double(0), new StringBuffer()), true, true);
+
+        return tree;
+    }
+
+    public void searchTree(OkudTree tree) {
+        String[] domains = new String[]{"INDIA", "UK_EIRE"};
+        String[] rattypes = new String[]{"BSA", "CONTRACT", "GUIDELINE", "MARKET", "PB", "PROMOTIONAL"};
+        String[] airports = new String[]{"AAA", "AAB", "AMS", "BGI", "CDG", "DUB", "GOP", "JFK", "JUL", "KAI", "LHR",
+                "LIM", "MAN", "NAM", "NBO", "OGG", "SHA", "TUL", "US", "XXX", "AAB", "AAE", "AAG", "CDG", "HKG", "HUL"
+                , "IAH", "JFK", "JVL", "LAX", "MAN", "MBI", "OPI", "PHL", "RUN", "SFO", "TVL", "TYZ", "US", "YYY",
+                "ZZZ"};
+        String[] prods = new String[]{"BAGS", "COURIER", "EXPRESS", "HUMREMAINS", "PERFORM", "PETS", "SECURE",
+                "UNITISED"};
+
+        Random rand = new Random();
+
+        int cnt = 0;
+
+        while (cnt < 10) {
+            cnt++;
+            System.out.println("Search iteration: " + cnt);
+            OkudTreeSearch crit = tree.createSearch();
+
+            //ratetypes
+            int num = rand.nextInt(rattypes.length);
+            for (int i = 0; i < num; i++) {
+                crit.addEqualSearchKey(0, rattypes[rand.nextInt(rattypes.length)]);
+            }
+
+            //domains
+            num = rand.nextInt(domains.length);
+            for (int i = 0; i < num; i++) {
+                crit.addEqualSearchKey(1, domains[rand.nextInt(domains.length)]);
+            }
+
+            //origins
+            num = rand.nextInt(airports.length);
+            for (int i = 0; i < num; i++) {
+                crit.addEqualSearchKey(2, airports[rand.nextInt(airports.length)]);
+            }
+
+            //destinations
+            num = rand.nextInt(airports.length);
+            for (int i = 0; i < num; i++) {
+                crit.addEqualSearchKey(3, airports[rand.nextInt(airports.length)]);
+            }
+
+            //prods
+            num = rand.nextInt(prods.length);
+            for (int i = 0; i < num; i++) {
+                crit.addEqualSearchKey(4, prods[rand.nextInt(prods.length)]);
+            }
+            System.out.println(crit);
+            List res = tree.search(crit);
+            System.out.println("#result nodes = " + res.size());
+            System.out.println(res);
+            try {
+                Thread.currentThread().sleep(rand.nextInt(5) * 100);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public OkudTreeLevel[] makeLevels() {
+        OkudTreeLevel[] levels = new OkudTreeLevel[5];
+
+        OkudTreeLevel level = new OkudTreeLevel("DOMAIN", "POS_ZONE", 0, false);
+        level.setLevelIndex(1);
+        level.setWildcardKey("ANY");
+        levels[1] = level;
+
+        level = new OkudTreeLevel("RATE_TYPE", "RATE_TYPE", 0, false);
+        level.setLevelIndex(0);
+        level.setWildcardKey("ANY");
+        levels[0] = level;
+
+        level = new OkudTreeLevel("Origin", "AIRPORTS", 10, false);
+        level.setLevelIndex(2);
+        level.setWildcardKey("ANY");
+        levels[2] = level;
+
+        level = new OkudTreeLevel("Destination", "AIRPORTS", 6, false);
+        level.setLevelIndex(3);
+        level.setWildcardKey("ANY");
+        levels[3] = level;
+
+        level = new OkudTreeLevel("VA_PRODUCT_CODE", "Product", 1, true);
+        level.setLevelIndex(4);
+        level.setWildcardKey("ANY");
+        levels[4] = level;
+
+        return levels;
+    }
+
+    public static Connection getConnection(String uname, String pword) throws Exception {
+        java.sql.Driver dr = (java.sql.Driver) Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+        java.sql.DriverManager.registerDriver(dr);
+
+        return java.sql.DriverManager.getConnection("jdbc:oracle:thin:@200.200.200.54:1521:ORCL",
+                uname, pword);
+    }
+}
+
+class DbBasedOkudTreeHelper implements IOkudTreeHelper {
+    DbBasedOkudTreeHelper() {
+
+    }
+
+    public void addDataToLeafNode(OkudTreeLeafNode leafNode, Object applicationDataObject) {
+        leafNode.setLeafNodeData(applicationDataObject);
+    }
+
+    public long computeScore(OkudTreeLevel level, Object key, AOkudTreeNode parentNode) {
+        long score = parentNode.getScore();
+
+        if (key != null) {
+            if (level.getWildcardKey() == null ||
+                    !level.getWildcardKey().equals(key)) {
+                score += level.getScore();
+            }
+        }
+
+        return score;
+    }
+
+    public List getTopLevelKeys(OkudTreeLevel level) {
+        System.out.println("getTopLevelKeys() called");
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DbBasedOkudTreeTest.getConnection("bapricing", "simple");
+            stmt = conn.createStatement();
+
+            String sql = "SELECT DISTINCT RATE_TYPE FROM " +
+                    "(select a.DOMAIN, a.RATE_TYPE, b.ORIGIN, b.DESTINATION, b.VA_PRODUCT_CODE, nvl(r.FIXED_PRICE, r" +
+                    ".FLAT_RATE) rate " +
+                    "from rt_rates a, rt_rates b, rt_uld_rate r " +
+                    "where a.RECORD_TYPE = 'S' and b.Record_type = 'L' and a.SHEET_ID = b.SHEET_ID and b.RATE_ID = r" +
+                    ".RATE_ID) ";
+
+            rs = stmt.executeQuery(sql);
+            ArrayList keys = new ArrayList();
+
+            while (rs.next()) {
+                keys.add(rs.getString(1));
+            }
+
+            return keys;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    public void populate(OkudTree tree, OkudTreeNode node, OkudTreeLevel level) {
+        System.out.println("populate() called");
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DbBasedOkudTreeTest.getConnection("bapricing", "simple");
+            stmt = conn.createStatement();
+
+            String sql = "SELECT RATE_TYPE, DOMAIN, ORIGIN, DESTINATION, VA_PRODUCT_CODE, RATE FROM " +
+                    "(select a.DOMAIN, a.RATE_TYPE, b.ORIGIN, b.DESTINATION, b.VA_PRODUCT_CODE, nvl(r.FIXED_PRICE, r" +
+                    ".FLAT_RATE) rate " +
+                    "from rt_rates a, rt_rates b, rt_uld_rate r " +
+                    "where a.RECORD_TYPE = 'S' and b.Record_type = 'L' and a.SHEET_ID = b.SHEET_ID and b.RATE_ID = r" +
+                    ".RATE_ID) ";
+
+            //create sql based on criteria
+            //for now assume level name is column name
+            String where = " WHERE ";
+            String clause = "";
+
+            //add previous node key values as clauses
+            OkudTreeLevel localvl = level;
+            OkudTreeNode lclnode = node;
+            int lvlIdx = level.getLevelIndex();
+
+            //add parent keys
+            while (lclnode.getParent() != null) { //except for root
+                if (!StrUtl.isEmpty(clause)) {
+                    clause += " AND ";
+                }
+                clause += localvl.getName() + " = '" + lclnode.getKey() + "'";
+                lclnode = (OkudTreeNode) lclnode.getParent();
+                if (lvlIdx > 0) {
+                    lvlIdx--;
+                    localvl = tree.getLevel(lvlIdx);
+                }
+            }
+
+            sql += where + clause;
+
+            System.out.println(sql);
+
+            rs = stmt.executeQuery(sql);
+            Object[] putkeys = new Object[5];
+            Double rate = null;
+            while (rs.next()) {
+                putkeys[0] = rs.getString(1);
+                putkeys[1] = rs.getString(2);
+                putkeys[2] = rs.getString(3);
+                putkeys[3] = rs.getString(4);
+                putkeys[4] = rs.getString(5);
+                rate = new Double(rs.getDouble(6));
+                StringBuffer sb = new StringBuffer("sb");
+                tree.putLeafNode(putkeys, new Pair(rate, sb));
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+    }
+}
