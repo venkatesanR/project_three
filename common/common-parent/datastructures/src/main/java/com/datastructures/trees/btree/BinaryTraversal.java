@@ -6,6 +6,7 @@ import com.datastructures.trees.model.TraverseType;
 import com.techmania.common.exceptions.InvalidOperationException;
 
 public class BinaryTraversal implements ITraversalFactory {
+
     @Override
     public <T extends Node> void traverse(TraverseType traverseType, T node) throws InvalidOperationException {
         BTreeNode bTreeNode = (BTreeNode) node;

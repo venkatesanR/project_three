@@ -1,4 +1,5 @@
 package com.techmania.scala.classesandobjects
+
 object EntryPoint extends {
   def main(args: Array[String]): Unit = {
     val compute = new SimpleScalaClass

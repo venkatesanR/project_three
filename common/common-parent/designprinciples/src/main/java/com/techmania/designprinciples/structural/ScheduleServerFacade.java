@@ -23,7 +23,6 @@ public class ScheduleServerFacade {
 	}
 
 	public void stopServer() {
-
 		scheduleServer.releaseProcesses();
 		scheduleServer.destory();
 		scheduleServer.destroySystemObjects();

@@ -28,7 +28,7 @@ public class DriverClass {
         if (n <= 1) {
             return n;
         }
-        //Divide problem by ste and collect it recursivly
+        //Divide problem by ste and collect it recursive
         return steps(n - 1) + steps(n - 2);
     }
 

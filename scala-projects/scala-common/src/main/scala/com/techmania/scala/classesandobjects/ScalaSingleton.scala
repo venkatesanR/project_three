@@ -9,6 +9,10 @@ class ScalaSingleton {
     sum += b
   }
 
+  def samplke(): Unit = {
+
+  }
+
   def checksum(): Int = ~(sum & 0xFF) + 1
 }
 

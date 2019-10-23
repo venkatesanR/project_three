@@ -24,26 +24,26 @@ public class ServiceLoader {
 
     private void loadServices(List<Class> classes) {
         classes.stream().
-                map(clazz -> {
-                    return Stream.of(clazz.getInterfaces()).
-                            map(filtered -> {
-                                ServiceHandler serviceHandler = null;
-                                try {
-                                    ServiceMarker annotation =
-                                            (ServiceMarker) filtered.getAnnotation(ServiceMarker.class);
-                                    if (annotation == null) {
-                                        return null;
+                map(clazz ->
+                        Stream.of(clazz.getInterfaces()).
+                                map(filtered -> {
+                                    ServiceHandler serviceHandler = null;
+                                    try {
+                                        ServiceMarker annotation =
+                                                (ServiceMarker) filtered.getAnnotation(ServiceMarker.class);
+                                        if (annotation == null) {
+                                            return null;
+                                        }
+                                        serviceHandler = new ServiceHandler(annotation.serviceName(),
+                                                clazz.newInstance());
+                                    } catch (IllegalAccessException e) {
+                                        System.out.println("********* Unable to create service***************");
+                                    } catch (InstantiationException e) {
+                                        System.out.println("********* Unable to Instantiate service**********");
                                     }
-                                    serviceHandler = new ServiceHandler(annotation.serviceName(),
-                                            clazz.newInstance());
-                                } catch (IllegalAccessException e) {
-                                    System.out.println("********* Unable to create service***************");
-                                } catch (InstantiationException e) {
-                                    System.out.println("********* Unable to Instantiate service**********");
-                                }
-                                return serviceHandler;
-                            }).findAny().get();
-                }).filter(Objects::nonNull).
+                                    return serviceHandler;
+                                }).findAny().get()
+                ).filter(Objects::nonNull).
                 forEach(serviceHandler -> {
                     SERVICE_HANDLERS.put(serviceHandler.getName(), serviceHandler);
                 });

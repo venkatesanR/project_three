@@ -8,7 +8,7 @@ public class GlobalTemperatureAnalyser extends JobExecutor {
 
     @Override
     public void setConfiguration(String jobName, String input, String output) {
-        new Job.JobBuilder()
+        job = new Job.JobBuilder()
                 .setName(jobName)
                 .setInput(input)
                 .setOutput(output)
@@ -24,6 +24,7 @@ public class GlobalTemperatureAnalyser extends JobExecutor {
     }
 
     public static void main(String[] args) {
+        args = new String[]{"1", "2"};
         if (args.length != 2) {
             System.err.println("Usage: MaxTemperature <input path> <output path>");
             System.exit(-1);
@@ -32,5 +33,4 @@ public class GlobalTemperatureAnalyser extends JobExecutor {
         analyser.setConfiguration("TempratureAnalyser", args[0], args[1]);
         analyser.execute();
     }
-
 }

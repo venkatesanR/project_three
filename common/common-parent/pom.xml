@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.techland</groupId>
     <artifactId>common-parent</artifactId>
@@ -14,23 +13,32 @@
         <module>designprinciples</module>
         <module>java-concepts</module>
         <module>hadoop-ecosys</module>
-    </modules>
+    <module>kafka-data-streams</module>
+    <module>spring-boot</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <log4j.version>2.6.1</log4j.version>
         <sl4j.version>1.7.26</sl4j.version>
         <common-beanutils.version>1.9.3</common-beanutils.version>
         <commons-collections4-version>4.1</commons-collections4-version>
         <commons-io.version>1.3.2</commons-io.version>
         <eh-cache.version>2.10.6</eh-cache.version>
+        <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
     <dependencies>
         <!-- logger dependency -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${sl4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -67,6 +75,13 @@
             <version>2.6.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.princeton.libs</groupId>
+            <artifactId>algs4</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>C:/projects/MDE/project_three/common/common-parent/libs/algs4.jar</systemPath>
+        </dependency>
 
         <!-- JUNIT DEPENDENCY -->
         <dependency>

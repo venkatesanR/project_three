@@ -111,7 +111,6 @@ public class GenUtl {
             }
         }
         sb.append("]");
-
         return sb.toString();
     }
 

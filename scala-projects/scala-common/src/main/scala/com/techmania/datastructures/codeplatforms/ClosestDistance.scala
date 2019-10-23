@@ -1,6 +1,6 @@
 package com.techmania.datastructures.codeplatforms
 
-import com.techmania.models.Point;
+;
 
 class ClosestDistance {
   private val WHITE = "WHITE"
@@ -11,7 +11,7 @@ class ClosestDistance {
 
   private def calculateDistance(R: Double, G: Double, B: Double, color: String): Double = {
     println("Waste of time")
-    val test=10;
+    val test = 10;
     return test;
   }
 

@@ -26,9 +26,10 @@ public class DriverClass {
         try {
             CompletableFuture data = new CompletableFuture<Room>();
             futures.put("A", data);
-            throw new RuntimeException("Shit");
+            futures.get("A").complete(new Room(1));
+            System.out.println(futures.get("A").get().getRoomNumber());
         } catch (Exception ex) {
-            System.out.println("Exokdodkw");
+            ex.printStackTrace();
         }
         System.out.println(futures.size());
     }
