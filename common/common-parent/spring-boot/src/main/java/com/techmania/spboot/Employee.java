@@ -1,6 +1,9 @@
 package com.techmania.spboot;
 
-public final class Employee {
+import java.io.Serializable;
+import java.util.regex.Pattern;
+
+public final class Employee implements Serializable {
     private final String name;
 
     public Employee(String name) {
@@ -18,9 +21,13 @@ public final class Employee {
         return this.name.equals(that.name);
     }
 
-    public static void main(String[] args) {
-        Employee e1 = new Employee("Hello");
-        Employee e2 = new Employee("Hello");
-        System.out.println(e1.equals(e2));
+    public String getName() {
+        return name;
     }
+
+    public static boolean priceCheck(String input) {
+        Pattern pattern = Pattern.compile("(?:[^a]*a[^a]*a)*");
+        return pattern.matcher(input).matches();
+    }
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.techland</groupId>
     <artifactId>common-parent</artifactId>
@@ -13,9 +14,9 @@
         <module>designprinciples</module>
         <module>java-concepts</module>
         <module>hadoop-ecosys</module>
-    <module>kafka-data-streams</module>
-    <module>spring-boot</module>
-  </modules>
+        <module>kafka-data-streams</module>
+        <module>spring-boot</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.6.1</log4j.version>
@@ -75,13 +76,13 @@
             <version>2.6.0</version>
         </dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>com.princeton.libs</groupId>
             <artifactId>algs4</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>C:/projects/MDE/project_three/common/common-parent/libs/algs4.jar</systemPath>
-        </dependency>
+            <systemPath>${project.basedir}/libs/algs4.jar</systemPath>
+        </dependency>-->
 
         <!-- JUNIT DEPENDENCY -->
         <dependency>
@@ -100,6 +101,9 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <excludes>
+                        <exclude>**/unionfind/unions/*.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

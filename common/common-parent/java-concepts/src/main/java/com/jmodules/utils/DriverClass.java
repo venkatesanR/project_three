@@ -1,6 +1,5 @@
 package com.jmodules.utils;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -9,7 +8,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.regex.Pattern;
 
 public class DriverClass {

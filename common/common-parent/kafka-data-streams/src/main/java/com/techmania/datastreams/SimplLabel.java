@@ -7,14 +7,18 @@ public class SimplLabel {
     }
 
     private void executeMyLabel() throws InterruptedException {
+        int count = 0;
         labelRef:
         while (true) {
-            System.out.println("One");
+            System.out.print(count);
             while (true) {
-                //break;
-                System.out.println("Two");
                 Thread.sleep(1000);
-                continue labelRef;
+                count += 1;
+                if (count < 10) {
+                    continue labelRef;
+                } else {
+                    break labelRef;
+                }
             }
         }
     }
