@@ -28,17 +28,17 @@ public class FileUtl {
 	}
 
 	/**
-	 * Returns file as string from a url
-	 */
-	public static String readFile(URL url) throws IOException {
-		return readFile(url.openStream());
-	}
-
-	/**
 	 * Returns file as string from a File
 	 */
 	public static String readFile(File file) throws IOException {
 		return readFile(new FileInputStream(file));
+	}
+
+	/**
+	 * Returns file as string from a url
+	 */
+	public static String readFile(URL url) throws IOException {
+		return readFile(url.openStream());
 	}
 
 	/**
