@@ -76,19 +76,11 @@
             <version>2.6.0</version>
         </dependency>
 
-<!--        <dependency>
-            <groupId>com.princeton.libs</groupId>
-            <artifactId>algs4</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/algs4.jar</systemPath>
-        </dependency>-->
-
         <!-- JUNIT DEPENDENCY -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
