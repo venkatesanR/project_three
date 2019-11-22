@@ -16,18 +16,25 @@ public class CoffeeWithSpringTest {
 
     private final ApplicationContextRunner
             contextRunner = new ApplicationContextRunner()
+            .withUserConfiguration(OverriddenConfig.class)
             .withConfiguration(AutoConfigurations.of(CoffeeConfiguration.class));
 
     @Test
     public void beanLoading() {
         contextRunner.run(context -> {
             assertThat(context).hasSingleBean(Coffee.class);
-            assertThat(context.getBean(Coffee.class).getName()).isEqualTo("costa cafe");
         });
     }
 
-    @Bean
-    public Coffee coffee() {
-        return new Coffee("TasteMeIamNew", 20, System.currentTimeMillis());
+    @Test
+    public void userConfiguration() {
+        contextRunner.run(context -> assertThat(context.getBean(Coffee.class).getName()).isEqualTo("TasteMeIamNew"));
+    }
+
+    static class OverriddenConfig {
+        @Bean
+        public Coffee coffee() {
+            return new Coffee("TasteMeIamNew", 20, System.currentTimeMillis());
+        }
     }
 }

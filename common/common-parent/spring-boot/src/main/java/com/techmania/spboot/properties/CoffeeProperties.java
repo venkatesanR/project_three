@@ -1,4 +1,4 @@
-package com.techmania.spboot.config;
+package com.techmania.spboot.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
