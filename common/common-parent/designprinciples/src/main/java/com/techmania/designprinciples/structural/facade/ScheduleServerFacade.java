@@ -1,4 +1,4 @@
-package com.techmania.designprinciples.structural;
+package com.techmania.designprinciples.structural.facade;
 
 /**
  * Example of Facade Pattern

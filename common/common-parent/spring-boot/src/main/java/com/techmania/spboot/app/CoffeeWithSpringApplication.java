@@ -1,4 +1,4 @@
-package com.techmania.spboot;
+package com.techmania.spboot.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +9,7 @@ public class CoffeeWithSpringApplication {
         SpringApplication.run(CoffeeWithSpringApplication.class);
     }
 
+    //TODO
     //ConditionalOnClass
     //ConditionalOnMissingBean
 }
