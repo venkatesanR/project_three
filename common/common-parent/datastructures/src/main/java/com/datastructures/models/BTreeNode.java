@@ -24,4 +24,9 @@ public class BTreeNode<Type> extends Node {
     public BTreeNode getRight() {
         return right;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -1,12 +1,20 @@
 package com.datastructures.trees.bst;
 
 import com.datastructures.models.BTreeNode;
+import com.datastructures.trees.btree.ITraversalFactory;
+import com.datastructures.trees.btree.TraversalFactory;
+import com.datastructures.trees.btree.TreeTypeEnum;
+import com.datastructures.trees.model.TraverseType;
+import com.techmania.common.exceptions.InvalidOperationException;
 
 public class BinarySearchTree<DataType extends Comparable> {
     private BTreeNode<DataType> root;
+    private ITraversalFactory traversalFactory;
 
     public void add(DataType data) {
         root = insertIntoTree(root, data);
+        traversalFactory = new TraversalFactory()
+                .getTraversalFactory(TreeTypeEnum.BINARY_TREE);
     }
 
     private BTreeNode insertIntoTree(BTreeNode<DataType> root, DataType data) {
@@ -22,31 +30,31 @@ public class BinarySearchTree<DataType extends Comparable> {
         return root;
     }
 
-    public void print() {
-        printInOrder(root);
+    public void print(boolean recursive) throws InvalidOperationException {
+        if (recursive) {
+            traversalFactory.traverse(TraverseType.PRE_ORDER, root);
+            System.out.println("\n");
+            traversalFactory.traverse(TraverseType.IN_ORDER, root);
+            //System.out.println("--------");
+            //traversalFactory.traverse(TraverseType.POST_ORDER, root);
+        }
     }
 
-    private void printInOrder(BTreeNode<DataType> root) {
-        if (root == null) {
-            return;
-        }
-        printInOrder(root.getLeft());
-        System.out.println(root.getData());
-        printInOrder(root.getRight());
-    }
 
     public static void main(String[] args) {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
-        tree.add(50);
-        tree.add(30);
-        tree.add(20);
-        tree.add(40);
-        tree.add(70);
-        tree.add(60);
-        tree.add(80);
-
-        // print inorder traversal of the BST
-        tree.print();
+        try {
+            tree.add(50);
+            tree.add(30);
+            tree.add(20);
+            tree.add(40);
+            tree.add(70);
+            tree.add(60);
+            tree.add(80);
+            tree.print(true);
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+        }
     }
 }
 

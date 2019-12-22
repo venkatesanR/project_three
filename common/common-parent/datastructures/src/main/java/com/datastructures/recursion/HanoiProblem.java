@@ -7,31 +7,31 @@ package com.datastructures.recursion;
  * and move all auxiliary disk to Destination T
  */
 public class HanoiProblem {
-	private int totalDisk;
+    private int totalDisk;
 
-	public HanoiProblem(int totalDisk) {
-		this.totalDisk = totalDisk;
-	}
+    public HanoiProblem(int totalDisk) {
+        this.totalDisk = totalDisk;
+    }
 
-	public static void main(String[] args) {
-		char towerA = 'A';
-		char towerB = 'B';
-		char towerC = 'C';
-		HanoiProblem hanoi = new HanoiProblem(3);
-		hanoi.towerOfHanoi(hanoi.totalDisk, towerA, towerC, towerB);
-	}
+    public static void main(String[] args) {
+        char towerA = 'A';
+        char towerB = 'B';
+        char towerC = 'C';
+        HanoiProblem hanoi = new HanoiProblem(3);
+        hanoi.towerOfHanoi(hanoi.totalDisk, towerA, towerB, towerC);
+    }
 
-	public void towerOfHanoi(int n, char source, char destination, char auxiliary) {
-		if (n == 1) {
-			System.out.println("Moving Disk From " + source + " to " + destination);
-			return;
-		}
-		// Move to auxiliary disk
-		towerOfHanoi(n - 1, source, auxiliary, destination);
+    public void towerOfHanoi(int n, char source, char destination, char auxiliary) {
+        if (n == 1) {
+            System.out.println("Moving Disk From " + source + " to " + destination);
+            return;
+        }
+        // Move to auxiliary disk
+        towerOfHanoi(n - 1, source, auxiliary, destination);
 
-		System.out.println("Moving Disk From " + source + " to " + destination);
+        System.out.println("Moving Disk From " + source + " to " + destination);
 
-		towerOfHanoi(n - 1, auxiliary, destination, source);
+        towerOfHanoi(n - 1, auxiliary, destination, source);
 
-	}
+    }
 }
