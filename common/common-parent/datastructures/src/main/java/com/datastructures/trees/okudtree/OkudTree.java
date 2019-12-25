@@ -1,10 +1,4 @@
-/*
- * OkudTree.java
- *
- * Created on March 1, 2006, 11:42 AM
- *
- * CopyRight AddVal Technology Inc.
- */
+
 
 package com.datastructures.trees.okudtree;
 

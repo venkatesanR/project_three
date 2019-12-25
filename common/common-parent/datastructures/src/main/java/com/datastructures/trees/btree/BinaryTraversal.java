@@ -5,6 +5,8 @@ import com.datastructures.models.Node;
 import com.datastructures.trees.model.TraverseType;
 import com.techmania.common.exceptions.InvalidOperationException;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTraversal implements ITraversalFactory {
@@ -18,6 +20,8 @@ public class BinaryTraversal implements ITraversalFactory {
             inOrder(bTreeNode, new Stack<>());
         } else if (TraverseType.POST_ORDER == traverseType) {
             traverse(bTreeNode, TraverseType.POST_ORDER);
+        } else if (TraverseType.LEVEL_ORDER == traverseType) {
+            levelOrder(bTreeNode);
         } else {
             throw new InvalidOperationException(String.format("Given traversal type %s not supported", traverseType));
         }
@@ -65,6 +69,21 @@ public class BinaryTraversal implements ITraversalFactory {
             }
             System.out.print(memory.peek().toString());
             node = memory.pop().getRight();
+        }
+    }
+
+    public void levelOrder(BTreeNode node) {
+        Queue<BTreeNode> holder = new LinkedList<>();
+        holder.offer(node);
+        while (!holder.isEmpty()) {
+            BTreeNode temp = holder.poll();
+            System.out.print(temp);
+            if (temp.getLeft() != null) {
+                holder.offer(temp.getLeft());
+            }
+            if (temp.getRight() != null) {
+                holder.offer(temp.getRight());
+            }
         }
     }
 }
