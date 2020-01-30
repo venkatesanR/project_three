@@ -1,15 +1,12 @@
 package com.techmania.spboot.batch.configuration;
 
-import org.springframework.batch.core.configuration.annotation.BatchConfigurer;
-import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
@@ -20,51 +17,38 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing
-@EnableConfigurationProperties({SpringBatchProperties.class})
 public class BatchConfiguration {
+    private DataSource dataSource;
+
     @Autowired
-    public SpringBatchProperties properties;
+    public DataSourceProperties dataSourceProperties;
 
     @Bean
     public DataSource dataSource() {
-        return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
-                .url(properties.getUrl())
-                .username(properties.getUsername())
-                .password(properties.getPassword())
+        return dataSourceProperties.initializeDataSourceBuilder()
                 .build();
     }
 
     @Bean
-    public BatchConfigurer batchConfigurer(@Autowired DataSource dataSource) {
-        return new DefaultBatchConfigurer() {
+    protected JobRepository createJobRepository(@Autowired DataSource dataSource) throws Exception {
+        JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+        factory.setDataSource(dataSource);
+        factory.setTransactionManager(txManager(dataSource));
+        factory.setIsolationLevelForCreate("ISOLATION_SERIALIZABLE");
+        factory.setTablePrefix("BATCH_");
+        factory.setMaxVarCharLength(1000);
+        return factory.getObject();
+    }
 
-            private PlatformTransactionManager txManager = new DataSourceTransactionManager(dataSource);
+    @Bean
+    protected JobLauncher createJobLauncher(@Autowired JobRepository createJobRepository) {
+        SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
+        jobLauncher.setJobRepository(createJobRepository);
+        jobLauncher.setTaskExecutor(new SimpleAsyncTaskExecutor());
+        return jobLauncher;
+    }
 
-            @Override
-            protected JobRepository createJobRepository() throws Exception {
-                JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
-                factory.setDataSource(dataSource);
-                factory.setTransactionManager(txManager);
-                factory.setIsolationLevelForCreate("ISOLATION_SERIALIZABLE");
-                factory.setTablePrefix("BATCH_");
-                factory.setMaxVarCharLength(1000);
-                return factory.getObject();
-            }
-
-            @Override
-            protected JobLauncher createJobLauncher() throws Exception {
-                SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
-                jobLauncher.setJobRepository(createJobRepository());
-                jobLauncher.setTaskExecutor(new SimpleAsyncTaskExecutor());
-                jobLauncher.afterPropertiesSet();
-                return jobLauncher;
-            }
-
-            @Override
-            public PlatformTransactionManager getTransactionManager() {
-                return txManager;
-            }
-        };
+    private PlatformTransactionManager txManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 }

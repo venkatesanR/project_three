@@ -33,8 +33,19 @@ public class Rotations {
         }
     }
 
-    public static void rotateByOne() {
-
+    public static void rotate(int[] input, int shift) {
+        if (shift >= input.length) {
+            shift = shift % input.length;
+        }
+        int counter = 0;
+        while (counter < shift) {
+            for (int i = 0; i < input.length - 1; i++) {
+                swap(input, i, i + 1);
+            }
+        }
+        for (int k = 0; k < input.length; k++) {
+            System.out.println(input + " ");
+        }
     }
 
     public static void reversalRotation(int[] arr, int shift) {

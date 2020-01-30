@@ -35,6 +35,20 @@ public class BinaryTreeProblems {
         return Boolean.FALSE;
     }
 
+    public Boolean deepFind(BTreeNode node, Object toBeFind) {
+        BTreeNode temp;
+        if (node == null) {
+            return Boolean.FALSE;
+        } else {
+            if (Objects.equals(toBeFind, node.getData())) {
+                return Boolean.TRUE;
+            } else {
+               // temp = deepFind(node.getData(), toBeFind);
+                return Boolean.TRUE;
+            }
+        }
+    }
+
     /**
      * Go to the  left ,Then right and
      * and compare with three

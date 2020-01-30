@@ -8,8 +8,4 @@ public class CoffeeWithSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(CoffeeWithSpringApplication.class);
     }
-
-    //TODO
-    //ConditionalOnClass
-    //ConditionalOnMissingBean
 }

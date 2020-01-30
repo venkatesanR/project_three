@@ -22,12 +22,6 @@ public class TemperatureAnalyser {
     @Bean
     public Job waterHeatAnalyzer(@Autowired Step boilerSensor) {
         return jobBuilderFactory.get("waterHeatAnalyzer")
-                .incrementer((parameters) -> {
-                    Map<String, JobParameter> data = new HashMap<>();
-                    data.put("jobParam",
-                            new JobParameter(UUID.randomUUID().toString()));
-                    return new JobParameters(data);
-                })
                 .start(boilerSensor)
                 .build();
     }
