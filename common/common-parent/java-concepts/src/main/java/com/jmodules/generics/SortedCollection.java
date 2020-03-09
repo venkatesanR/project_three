@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class SortedCollection<E extends Comparable<? super E>> {
-	private List<E> input;
+    private List<E> input;
 
-	public SortedCollection(Collection<E> all) {
-		this.input = (List<E>) all;
-	}
+    public SortedCollection(Collection<E> all) {
+        this.input = (List<E>) all;
+    }
 
-	public List<E> sort() {
-		Collections.sort(input);
-		return input;
-	}
+    public List<E> sort() {
+        Collections.sort(input);
+        return input;
+    }
 }

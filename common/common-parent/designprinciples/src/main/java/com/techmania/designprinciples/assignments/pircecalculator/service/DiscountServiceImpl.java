@@ -29,25 +29,23 @@ public class DiscountServiceImpl implements IDiscountService {
 
         PurchaseResponse response = new PurchaseResponse();
 
-        return request.getProductDetails()
-                .values().stream().
-                        map(applyDiscount()).
-                        map((product) -> {
-                            response.setTotal(response.getTotal()
-                                    + product.getDiscountedPrice());
-                            response.setActual(response.getActual()
-                                    + product.getActualCost());
-                            response.getProducts().add(product);
-                            return response;
-                        }).findAny().get();
+        request.getProductDetails().values().stream()
+                .map(applyDiscount())
+                .forEach((product) -> {
+                    response.setTotal(Float.sum(response.getTotal(), product.getDiscountedPrice()));
+                    response.setActual(Float.sum(response.getActual(), product.getActualCost()));
+                    response.getProducts().add(product);
+                });
+
+        return response;
     }
 
     private Function<Product, Product> applyDiscount() {
         return product -> {
-            product.setDiscountedCost(applyDiscount(product.getActualCost(),
+            product.setDiscountedCost(calculateDiscount(product.getActualCost(),
                     discountCache.get(product.getCategory().name())));
             if (hasClearance(product.getName())) {
-                product.setDiscountedCost(applyDiscount(product.getDiscountedPrice(),
+                product.setDiscountedCost(calculateDiscount(product.getDiscountedPrice(),
                         discountCache.get(clearanceIdentifier)));
             }
             return product;
@@ -55,7 +53,7 @@ public class DiscountServiceImpl implements IDiscountService {
     }
 
     //utils
-    private float applyDiscount(Float actual, Float discount) {
+    private float calculateDiscount(Float actual, Float discount) {
         return round(actual - (actual * discount), 2);
     }
 

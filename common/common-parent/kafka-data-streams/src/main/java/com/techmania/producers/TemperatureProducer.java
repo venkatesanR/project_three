@@ -15,7 +15,7 @@ public class TemperatureProducer {
     }
 
     public void send(String data) {
-        ProducerRecord<String, String> temprature = new ProducerRecord("test", "key", data);
+        ProducerRecord<String, String> temprature = new ProducerRecord("LOCAL_ENDPOINT_TEST.", "key", data);
         try {
             RecordMetadata out = (RecordMetadata) kafkaProducer.send(temprature).get();
             System.out.println(out);
@@ -26,8 +26,9 @@ public class TemperatureProducer {
         }
     }
 
-    public void asyncSend() {
-
+    public void asyncSend(String data) {
+        ProducerRecord<String, String> temprature = new ProducerRecord("LOCAL_ENDPOINT_TEST_ASYNC.", "key", data);
+        kafkaProducer.send(temprature, (metadata, exception) -> System.out.println("Your record has been"));
     }
 
     private void load() {
@@ -44,7 +45,8 @@ public class TemperatureProducer {
         while (count < 10) {
             try {
                 count += 1;
-                producer.send(String.valueOf(System.nanoTime()));
+                producer.send("Hello Kafka Healthy!!!");
+                producer.asyncSend("Hello Kafka SOS!!!");
                 Thread.sleep(5000l);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -1,9 +1,9 @@
 package com.datastructures.models;
 
 
-public class BTreeNode<Type> extends Node {
-    private BTreeNode left;
-    private BTreeNode right;
+public class BTreeNode<Type> extends Node<Type> {
+    private BTreeNode<Type> left;
+    private BTreeNode<Type> right;
 
     public BTreeNode(Type data) {
         super(data);
@@ -17,11 +17,11 @@ public class BTreeNode<Type> extends Node {
         this.right = right;
     }
 
-    public BTreeNode getLeft() {
+    public BTreeNode<Type> getLeft() {
         return left;
     }
 
-    public BTreeNode getRight() {
+    public BTreeNode<Type> getRight() {
         return right;
     }
 

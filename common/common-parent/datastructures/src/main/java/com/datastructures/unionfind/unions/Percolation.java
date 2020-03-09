@@ -1,9 +1,8 @@
 package com.datastructures.unionfind.unions;
 
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private final WeightedQuickUnionUF SITE_ROUTES;
+    private final WeightedQuickUnion SITE_ROUTES;
 
     private boolean[][] status;
     private final int top;
@@ -17,7 +16,7 @@ public class Percolation {
             throw new IllegalArgumentException("Cannot hold 0/-Ve array size");
         }
 
-        SITE_ROUTES = new WeightedQuickUnionUF((n * n) + 2);
+        SITE_ROUTES = new WeightedQuickUnion((n * n) + 2);
         status = new boolean[n][n];
         this.n = n;
         top = 0;
@@ -75,7 +74,7 @@ public class Percolation {
                     + (status.length - 1));
         }
         if (isOpen(row, col)) {
-            return SITE_ROUTES.connected(computeSiteIndex(row, col), top);
+            return SITE_ROUTES.isConnected(computeSiteIndex(row, col), top);
         }
         return false;
     }
@@ -87,7 +86,7 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        return SITE_ROUTES.connected(top, bottom);
+        return SITE_ROUTES.isConnected(top, bottom);
     }
 
     private int computeSiteIndex(int row, int col) {
