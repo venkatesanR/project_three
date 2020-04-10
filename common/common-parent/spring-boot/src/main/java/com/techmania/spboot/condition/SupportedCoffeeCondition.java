@@ -15,8 +15,7 @@ class SupportedCoffeeCondition extends SpringBootCondition {
     private static final String COFFEE_NAME = "coffee.name";
 
     @Override
-    public ConditionOutcome getMatchOutcome(ConditionContext context,
-                                            AnnotatedTypeMetadata metadata) {
+    public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
 
         ConditionMessage.Builder validCoffee = ConditionMessage.forCondition("validCoffee");
         Environment environment = context.getEnvironment();
@@ -34,4 +33,5 @@ class SupportedCoffeeCondition extends SpringBootCondition {
     private static boolean validCoffee(String coffee) {
         return coffee != null && !coffee.equalsIgnoreCase("Hella");
     }
+
 }

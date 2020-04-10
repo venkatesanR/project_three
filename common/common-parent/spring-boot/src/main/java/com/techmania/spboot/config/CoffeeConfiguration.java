@@ -6,7 +6,9 @@ import com.techmania.spboot.properties.CoffeeProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -19,6 +21,7 @@ public class CoffeeConfiguration {
     @ConditionalOnMissingBean
     @ValidCoffeeConfig
     public Coffee coffee() {
-        return new Coffee(coffee.getName(), coffee.getPrice(), System.currentTimeMillis());
+        return new Coffee(coffee.getName(),
+                coffee.getPrice(), System.currentTimeMillis());
     }
 }

@@ -1,0 +1,57 @@
+logging:
+--------
+   	* logging will provide much detail about issue,But message should be self explantory. 
+   	  DO: logger.debug('Received ');
+   	  DON'T
+
+   	* Developer needs to aware what need to logged on which
+     	log status(i.e INFO,WARN,DEBUG,TRACE,ERROR,FATAL)
+
+   	* If we logging object detail avoid concatination and 
+         use marker for more readability and formating.
+
+    * If logic is heave produce once and use reference for logging.
+
+code-readability:
+-----------------
+   * If logic exceeds thumb rule please refactor as method | function (app:visibilty)
+   * Document crisp ablout logic inside method but don't pollute by docs.
+   * Giving reasonable name to variable to method and function make much readable and 
+     under standable about functionality.
+
+using-resources:
+---------------
+  while handling resources used try with resources as much as possible.
+
+handling NPE:
+-------------
+    * Simple NPE will not give details about exception ,Using Objects Utils or
+      Spring Assert class have utils to validate and display those errors nicely.
+
+    * From Java8 you can use Optional<T> Functional interface to manage nulls.
+
+Picking right -DS:
+------------------
+    * Picking right data structures will hugely reduce time complexity of an
+      execution. Example for a caching data we can not use simple array list
+      because each fetch after data load will give O(N) worst case ,
+      Map will resolve this by O(1).
+
+      While using map also we should have to avoid un-neccessary rehashing. 
+
+applying appropriate design patterns:
+-------------------------------------
+  Based requirement we need to choose appropriate design patterns in order 
+  to avoid un-neccessary re-write.
+
+honouring-SONAR rules:
+----------------------
+  Honouring SONAR rules will hugely reduce runtime bugs in our code.
+
+Unit test && Integration test
+-----------------------------
+ * Using mocks Each functionality and code block need to be tested
+ * Integration suite will ensure basic working of sanity scenarios,by mocking external module
+
+ * Using mocks Each functionality and code block need to be tested
+ * Integration suite will ensure basic working of sanity scenarios,by mocking external module

@@ -1,11 +1,37 @@
 package com.datastructures.trees.btree;
 
 import com.datastructures.models.BTreeNode;
+import org.apache.commons.collections.comparators.ComparableComparator;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class BinaryTreeProblems {
+
+
+    public static BTreeNode max(BTreeNode node, BTreeNode max) {
+        if (node == null) {
+            return max;
+        }
+        if (max == null
+                || ComparableComparator.getInstance()
+                .compare(node.getData(), max.getData()) > 0) {
+            max = node;
+        }
+        max = max(node.getLeft(), max);
+        max = max(node.getRight(), max);
+        return max;
+    }
+
+    public static boolean findRecursiveWay(BTreeNode node, Object toCompare) {
+        if (node == null) {
+            return false;
+        }
+        return Objects.equals(node.getData(), toCompare)
+                || findRecursiveWay(node.getLeft(), toCompare)
+                || findRecursiveWay(node.getRight(), toCompare);
+    }
+
     /**
      * Go to the  left ,Then right and
      * and compare with three
@@ -36,16 +62,14 @@ public class BinaryTreeProblems {
     }
 
     public Boolean deepFind(BTreeNode node, Object toBeFind) {
-        BTreeNode temp;
         if (node == null) {
             return Boolean.FALSE;
         } else {
             if (Objects.equals(toBeFind, node.getData())) {
                 return Boolean.TRUE;
-            } else {
-                // temp = deepFind(node.getData(), toBeFind);
-                return Boolean.TRUE;
             }
+            return deepFind(node.getLeft(), toBeFind)
+                    || deepFind(node.getRight(), toBeFind);
         }
     }
 
@@ -116,9 +140,9 @@ public class BinaryTreeProblems {
             value -= root.getLeft() != null ? root.getLeft().getData() : 0;
             value -= root.getRight() != null ? root.getRight().getData() : 0;
         }
-        System.out.println("Node: " + root.getData() + ", Sum: " + value);
         value += sum(root.getLeft(), key);
         value += sum(root.getRight(), key);
+//        System.out.println("Node: " + root.getData() + ", Sum: " + value);
         return value;
     }
 
@@ -142,9 +166,10 @@ public class BinaryTreeProblems {
         six.setLeft(nine);
         six.setRight(eight);
 
-        BTreeNode<Integer> ten = new BTreeNode<>(10);
+        BTreeNode<Integer> ten = new BTreeNode<>(0);
         ten.setLeft(two);
         ten.setRight(six);
-        System.out.println(sum(ten, 2));
+        System.out.println("Sum: " + sum(ten, 2));
+        System.out.println("Max: " + max(ten, (BTreeNode) null).getData());
     }
 }

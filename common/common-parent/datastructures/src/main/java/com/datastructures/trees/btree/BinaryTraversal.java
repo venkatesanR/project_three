@@ -15,11 +15,11 @@ public class BinaryTraversal implements ITraversalFactory {
     public <T extends Node> void traverse(TraverseType traverseType, T node) throws InvalidOperationException {
         BTreeNode bTreeNode = (BTreeNode) node;
         if (TraverseType.PRE_ORDER == traverseType) {
-            preOrder(bTreeNode, new Stack<>());
+            preOrder(bTreeNode);
         } else if (TraverseType.IN_ORDER == traverseType) {
-            inOrder(bTreeNode, new Stack<>());
+            inOrder(bTreeNode);
         } else if (TraverseType.POST_ORDER == traverseType) {
-            traverse(bTreeNode, TraverseType.POST_ORDER);
+            postOrder(bTreeNode);
         } else if (TraverseType.LEVEL_ORDER == traverseType) {
             levelOrder(bTreeNode);
         } else {
@@ -44,7 +44,8 @@ public class BinaryTraversal implements ITraversalFactory {
         }
     }
 
-    public void preOrder(BTreeNode node, Stack<BTreeNode> memory) {
+    public void preOrder(BTreeNode node) {
+        Stack<BTreeNode> memory = new Stack<>();
         while (true) {
             while (node != null) {
                 System.out.print(node.toString());
@@ -58,7 +59,8 @@ public class BinaryTraversal implements ITraversalFactory {
         }
     }
 
-    public void inOrder(BTreeNode node, Stack<BTreeNode> memory) {
+    public void inOrder(BTreeNode node) {
+        Stack<BTreeNode> memory = new Stack<>();
         while (true) {
             while (node != null) {
                 memory.add(node);
@@ -69,6 +71,32 @@ public class BinaryTraversal implements ITraversalFactory {
             }
             System.out.print(memory.peek().toString());
             node = memory.pop().getRight();
+        }
+    }
+
+    public void postOrder(BTreeNode node) {
+        Stack<BTreeNode> memory = new Stack<>();
+        BTreeNode previous = null;
+        while (true) {
+            while (node != null) {
+                memory.add(node);
+                node = node.getLeft();
+            }
+            if (memory.isEmpty()) {
+                break;
+            }
+            while (node == null && !memory.isEmpty()) {
+                node = memory.peek();
+                if (node.getRight() == null
+                        || node.getRight().equals(previous)) {
+                    System.out.print(node.toString());
+                    memory.pop();
+                    previous = node;
+                    node = null;
+                } else {
+                    node = node.getRight();
+                }
+            }
         }
     }
 

@@ -1,0 +1,16 @@
+event:
+  one:
+    type: kafka
+    kafka.host: 1.1.1.1
+    kafka.brokers: 2.2.2.2
+  two:
+    type: rest
+    rest.endpoint: abac.com
+
+keyvalue:
+  data: somevalue
+  inbound:
+    artist:
+      actor:
+        keyOne: valueOne
+        keyTwo: valueTwo

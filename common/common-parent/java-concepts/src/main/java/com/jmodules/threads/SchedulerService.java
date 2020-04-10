@@ -13,23 +13,21 @@ public class SchedulerService implements IScheduler {
 
     public SchedulerService() {
         helper = new SchedulerHelper(MAX_THREAD_COUNT);
-        Runnable service = new Runnable() {
-            public void run() {
-                while (true) {
-                    try {
-                        synchronized (TASK_QUEUE) {
-							while (TASK_QUEUE.size() == 0) {
-								TASK_QUEUE.wait();
-							}
-                            helper.execute(TASK_QUEUE.poll());
+        Runnable service = () -> {
+            while (true) {
+                try {
+                    synchronized (TASK_QUEUE) {
+                        while (TASK_QUEUE.size() == 0) {
+                            TASK_QUEUE.wait();
                         }
-                    } catch (ProcessException pex) {
-                        pex.printStackTrace();
-                    } catch (InterruptedException ex) {
-                        System.out.println(ex);
-                    } catch (Exception ex) {
-                        System.out.println(ex);
+                        helper.execute(TASK_QUEUE.poll());
                     }
+                } catch (ProcessException pex) {
+                    pex.printStackTrace();
+                } catch (InterruptedException ex) {
+                    System.out.println(ex);
+                } catch (Exception ex) {
+                    System.out.println(ex);
                 }
             }
         };

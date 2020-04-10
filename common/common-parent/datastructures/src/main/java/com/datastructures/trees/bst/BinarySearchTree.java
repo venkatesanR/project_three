@@ -9,12 +9,11 @@ import com.techmania.common.exceptions.InvalidOperationException;
 
 public class BinarySearchTree<DataType extends Comparable> {
     private BTreeNode<DataType> root;
-    private ITraversalFactory traversalFactory;
+    private ITraversalFactory traversalFactory = new TraversalFactory()
+            .getTraversalFactory(TreeTypeEnum.BINARY_TREE);
 
     public void add(DataType data) {
         root = insertIntoTree(root, data);
-        traversalFactory = new TraversalFactory()
-                .getTraversalFactory(TreeTypeEnum.BINARY_TREE);
     }
 
     private BTreeNode insertIntoTree(BTreeNode<DataType> root, DataType data) {
@@ -35,8 +34,8 @@ public class BinarySearchTree<DataType extends Comparable> {
             traversalFactory.traverse(TraverseType.PRE_ORDER, root);
             System.out.println("\n");
             traversalFactory.traverse(TraverseType.IN_ORDER, root);
-            //System.out.println("--------");
-            //traversalFactory.traverse(TraverseType.POST_ORDER, root);
+            System.out.println("\n");
+            traversalFactory.traverse(TraverseType.POST_ORDER, root);
         }
     }
 
@@ -57,4 +56,3 @@ public class BinarySearchTree<DataType extends Comparable> {
         }
     }
 }
-
