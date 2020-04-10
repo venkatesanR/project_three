@@ -14,15 +14,21 @@ public class ServiceLoader {
     private final Map<String, ServiceHandler> SERVICE_HANDLERS = new HashMap<String, ServiceHandler>();
 
     public ServiceLoader(Class... classes) {
-        this.SERVICE_HANDLERS = Arrays.asList(classes)
-                .stream().reduce(clazz -> Arrays.asList(clazz.getInterfaces())).
-                //  filter(clazz -> Objects.nonNull(clazz. (ServiceMarker.class))).
-                        map(serviceable -> {
+        Arrays.asList(classes)
+                .stream()
+                .flatMap(clazz -> Arrays.stream(clazz.getInterfaces()))
+                .map(serviceable -> {
                     ServiceMarker annotation =
                             (ServiceMarker) serviceable.getAnnotation(ServiceMarker.class);
-                    return new ServiceHandler(annotation.serviceName(), serviceable.newInstance());
-                }).collect(
-                        Collecktors.toMap(ServiceHandler::getName, Function.identity()));
+                    try {
+                        return new ServiceHandler(annotation.serviceName(), serviceable.newInstance());
+                    } catch (InstantiationException e) {
+                        // e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        // e.printStackTrace();
+                    }
+                    return null;
+                }).forEach(serviceHandler -> SERVICE_HANDLERS.put(serviceHandler.getName(), serviceHandler));
     }
 
     public <T> ServiceHandler getHandler(Class<T> service) {
