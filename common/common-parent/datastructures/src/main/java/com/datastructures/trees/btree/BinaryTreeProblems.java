@@ -109,7 +109,10 @@ public class BinaryTreeProblems {
         if (node == null) {
             return 0l;
         }
-        return size(node.getLeft()) + size(node.getRight()) + 1;
+        int sum = 1;
+        sum += size(node.getLeft());
+        sum += size(node.getRight());
+        return sum;
     }
 
     public int height(BTreeNode node) {
