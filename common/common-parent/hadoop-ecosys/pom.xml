@@ -14,7 +14,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <hadoop-core.version>1.2.1</hadoop-core.version>
-        <hadoop-ecosys.version>3.2.0</hadoop-ecosys.version>
+        <hadoop-ecosys.version>3.2.4</hadoop-ecosys.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
